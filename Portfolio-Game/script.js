@@ -46,7 +46,7 @@ if (!canvas || !ctx || !fireworksCanvas || !fwCtx || !gameContainer || !startOve
     // This object holds all external and internal links.
     // When you deploy your site, you can easily update these paths in one place.
     // I'm assuming your 'portfolio-website' folder is next to your 'Portfolio-Game' folder.
-    const portfolioBaseUrl = '../portfolio-website/';
+    const portfolioBaseUrl = '/Portfolio-Website/';
     const urls = {
         portfolioHome: `${portfolioBaseUrl}portfolio-site.html`, // The main portfolio homepage
         portfolioLevel1: `${portfolioBaseUrl}portfolio-level-1.html`, // Direct link to the case study page for Level 1
@@ -341,7 +341,7 @@ if (!canvas || !ctx || !fireworksCanvas || !fwCtx || !gameContainer || !startOve
         'About': {
             layout: 'flex',
             classes: ['flex-layout'],
-            html: `<div class="text-content"><h2>Dylan Romero</h2><p><h3>UX Leader | Content Designer/Engineer | Ex-Professor | AI Spelunker | <a href="${urls.linkedIn}" target="_blank" rel="noopener noreferrer">LinkedIn</a></h3></p><p>Howdy! I'm the kind of guy who will add a skateboard to my game character to avoid spending extra time creating a sprite sheet. Do I skate? No; I barely know what an ollie is.</p><p>So why would I do that? Because I ruthlessly prioritize my time to focus on customer needs (that's you!), business outcomes (currently for Microsoft), and learning through play (AI + portfolio + game? Yes please!).</p><p>As a content design leader, I love spreading the joy of learning, which I balance out with scorn for patterns and practices that erode trust and make UX a bummer for customers.</p><p>I love doing this so much that <a href="https://commlead.uw.edu/person/dylan-romero/">I teach a content design class</a> at the Communication Leadership masters program at the University of Washington, where students laugh at my jokes solely because they're funny and not because I hold power over their grades.</p></div><div class="image-content"><img src="images/dylan-about-me.png" alt="Dylan Romero"></div>`
+            html: `<div class="text-content"><h2>Dylan Romero</h2><p><h3>UX Leader | Content Designer/Engineer | Ex-Professor | AI Spelunker | <a href="${urls.linkedIn}" target="_blank" rel="noopener noreferrer">LinkedIn</a></h3></p><p>Howdy! I'm the kind of guy who will add a skateboard to my game character to avoid spending extra time creating a sprite sheet. Do I skate? No; I barely know what an ollie is.</p><p>So why would I do that? Because I ruthlessly prioritize my time to focus on customer needs (that's you!), business outcomes (currently for Microsoft), and learning through play (AI + portfolio + game? Yes please!).</p><p>As a content design leader, I love spreading the joy of learning, which I balance out with scorn for patterns and practices that erode trust and make UX a bummer for customers.</p><p>I love doing this so much that <a href="https://commlead.uw.edu/person/dylan-romero/">I teach a content design class</a> at the Communication Leadership masters program at the University of Washington, where students laugh at my jokes solely because they're funny and not because I hold power over their grades.</p></div><div class="image-content"><img src="/Portfolio-Game/images/dylan-about-me.PNG" alt="Dylan Romero"></div>`
         },
         'Fun facts': {
             layout: 'block',
@@ -649,13 +649,13 @@ if (!canvas || !ctx || !fireworksCanvas || !fwCtx || !gameContainer || !startOve
     const characterPromise = new Promise((resolve, reject) => {
         characterImage.onload = () => { characterImageLoaded = true; resolve(); };
         characterImage.onerror = reject;
-        characterImage.src = 'images/Dylan-character.png';
+        characterImage.src = '/Portfolio-Game/images/Dylan-character.png';
     });
 
     const coffeePromise = new Promise((resolve, reject) => {
         coffeeImage.onload = () => { coffeeImageLoaded = true; resolve(); };
         coffeeImage.onerror = reject;
-        coffeeImage.src = 'images/coffee-bit.png';
+        coffeeImage.src = '/Portfolio-Game/images/coffee-bit.png';
     });
 
     Promise.all([fontPromise, characterPromise, coffeePromise])
