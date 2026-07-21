@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Romero - Content Design Manager Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="game-style.css">
+</head>
+
+<body>
+
+    <h1>Dylan Romero</h1>
+    <p id="instructions">Use Arrow Keys to move and Spacebar to jump. Press Enter to "drink" the coffee.</p>
+
+    <div id="game-container">
+        <div id="power-bar-container">
+            <span id="power-bar-label">Coffee Power: 0/5</span>
+            <div id="power-bar-visual">
+                <div id="power-bar-fill"></div>
+            </div>
+        </div>
+        <div id="start-overlay">
+            <button id="startButton" disabled>Loading Assets...</button>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <canvas id="fireworksCanvas"></canvas>
+    </div>
+
+    <div id="portfolio-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span id="close-portfolio-modal" class="modal-close-button">&times;</span>
+            <div id="modal-placeholder-text" class="modal-text-content">Placeholder Content</div>
+            <div id="carousel-container">
+                <div class="carousel-slides">
+                    <div class="carousel-slide active"><img src="images/portfolio1.png" alt="Portfolio Piece 1"></div>
+                    <div class="carousel-slide"><img src="images/portfolio2.png" alt="Portfolio Piece 2"></div>
+                    <div class="carousel-slide"><img src="images/portfolio3.png" alt="Portfolio Piece 3"></div>
+                </div>
+                <a class="prev-slide" onclick="changeSlide(-1)">&#10094;</a>
+                <a class="next-slide" onclick="changeSlide(1)">&#10095;</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="completion-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span id="close-completion-modal" class="modal-close-button">&times;</span>
+            <div id="completion-text" class="modal-text-content" style="display: block; font-family: sans-serif;">
+                <h2>You Got All The Coffee!</h2>
+                <p>
+                    Congrats! You unlocked the
+                    <a href="https://www.darkpattern.games/pattern/46/complete-the-collection.html" target="_blank"
+                        rel="noopener noreferrer">"Complete the Collection"</a>
+                    dark design pattern! That's when someone (in this case, me) hijacks your brain's desire to complete
+                    a task for their own nefarious purposes. At least I didn't make you buy anything.
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

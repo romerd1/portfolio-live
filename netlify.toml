@@ -1,0 +1,22 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/"
+  to = "/Portfolio-Website/portfolio-site.html"
+  status = 301
+
+[[redirects]]
+  from = "/game"
+  to = "/Portfolio-Game/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio-website/portfolio-site/game"
+  to = "/game"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio-website/portfolio-site/game/"
+  to = "/game"
+  status = 301

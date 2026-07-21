@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Romero - Content Design Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Sans+Pro:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container header-container">
+            <div class="header-title">
+                <h1>Dylan Romero</h1>
+                <p>UX Leader | Content Design/Engineering | AI Systems & Strategy</p>
+            </div>
+            <div class="social-links header-social-links">
+                <img src="Dylan-character.png" alt="Character icon" class="header-icon character-icon">
+                <img src="coffee-bit.png" alt="Coffee icon" class="header-icon coffee-icon">
+                <a href="https://www.linkedin.com/in/dylanromero/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Dylan Romero's LinkedIn Profile" title="LinkedIn Profile">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#tutorial">Game Version</a></li>
+                <li><a href="#facts">Facts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="about">
+            <div class="container">
+                <h2>About me</h2>
+                <div class="section-body-padded">
+                    <div class="about-content">
+                        <div class="text-content">
+                            <p>Howdy! I'm the kind of guy who will add a skateboard to his portfolio-cum-video-game
+                                character to avoid spending extra time creating a sprite sheet. Do I skate? No; I barely
+                                know what an ollie is.</p>
+                            <p>So why would I do that? Because I ruthlessly prioritize my time to focus on customer
+                                needs (that's you!), business outcomes (currently for Microsoft), and learning through
+                                play (AI + portfolio + game? Yes please!).</p>
+                            <p>As a content design leader, I love spreading the joy of learning, which I balance out
+                                with scorn for patterns and practices that erode trust and make UX a bummer for
+                                customers.</p>
+                            <p>I love doing this so much that <a href="https://commlead.uw.edu/person/dylan-romero/">I
+                                    teach a content design class</a> at the Communication Leadership masters program at
+                                the University of Washington, where students laugh at my jokes solely because they're
+                                funny and not because I hold power over their grades.</p>
+                        </div>
+                        <div class="image-content">
+                            <img src="dylan-about-me.png" alt="Dylan Romero - Headshot">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <h2>Portfolio</h2>
+                <div class="section-body-padded">
+                    <p style="text-align: center; margin-bottom: 20px;">Selected works. Click an item to view the case
+                        study, or use the arrows to navigate.</p>
+                    <div id="portfolio-carousel">
+                        <div class="carousel-slides">
+                            <a href="portfolio-level-1.html" class="carousel-slide">
+                                <img src="UW-building.png" alt="8-bit university building">
+                                <div class="slide-caption">
+                                    <h3>Level 1: Grading Gauntlet</h3>
+                                    <p>Developing and teaching the content design curriculum at the University of
+                                        Washington.</p>
+                                </div>
+                            </a>
+                            <a href="portfolio-level-2.html" class="carousel-slide">
+                                <img src="microsoft-community-8bit.png"
+                                    alt="8-bit microsoft logo with connected profile headshots">
+                                <div class="slide-caption">
+                                    <h3>Level 2: Consensus Canyon Crossing</h3>
+                                    <p>Building a cross-organizational content design community at Microsoft.</p>
+                                </div>
+                            </a>
+                            <a href="portfolio-level-3.html" class="carousel-slide">
+                                <img src="ai-transformation-8bit.png"
+                                    alt="8-bit image of a happy person with robotic AI gloves on">
+                                <div class="slide-caption">
+                                    <h3>Level 3: The AI Em-Dash</h3>
+                                    <p>Transforming the content design discipline by integrating AI tools, building
+                                        time-saving content agents and skills, and developing an
+                                        internal language system.</p>
+                                </div>
+                            </a>
+                        </div>
+                        <button class="prev-slide" onclick="changeSlide(-1)">&#10094;</button>
+                        <button class="next-slide" onclick="changeSlide(1)">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tutorial">
+            <div class="container">
+                <h2>Play the game version of my portfolio</h2>
+                <div class="section-body-padded">
+                    <div class="character-image-container">
+                        <img src="Dylan-character.png" alt="Game Character Sprite">
+                    </div>
+                    <div class="text-content">
+                        <p>If you arrived here from the game version of this portfolio, welcome! Good design leverages
+                            existing mental models. In the case of my porfoli-game (gamefolio?) I used
+                            <a href="https://www.nngroup.com/articles/skeuomorphism/" target="_blank"
+                                rel="noopener noreferrer">skeuomorphism</a>
+                            as a well-established model for digital navigation. (Don't get me started on the pros and
+                            cons of skeuomorphism.)
+                        </p>
+                        <p>If you came straight to my portfolio first, go check out the game!
+                            I'm not a coder, but as a writer, designer, and all around creative guy, I'm having a blast
+                            leveraging AI to expand my
+                            toolkit and tell more robust stories.</p>
+                        <a href="../Portfolio-Game/index.html" class="back-to-game-btn" style="margin-top: 20px;">Play
+                            the game</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="facts">
+            <div class="container">
+                <h2>Fun facts</h2>
+                <div class="section-body-padded">
+                    <div class="text-content">
+                        <p>Donkey Kong is often credited as the first platformer, but the lesser-known game called Space
+                            Panic is the real OG (released about a year earlier in 1980). In that game you could climb
+                            ladders, but you couldn't jump. 40+ years later, Dylan Romero's portfolio finally added the
+                            ability to jump. You're welcome.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Dylan Romero. Based in Seattle, Washington, USA.</p>
+            <p>Last Updated: March 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Footer Year ---
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // --- Carousel Logic ---
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('#portfolio-carousel .carousel-slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            if (index >= totalSlides) { currentSlideIndex = 0; }
+            else if (index < 0) { currentSlideIndex = totalSlides - 1; }
+            else { currentSlideIndex = index; }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            if (slides[currentSlideIndex]) { slides[currentSlideIndex].classList.add('active'); }
+        }
+
+        window.changeSlide = function (n) { showSlide(currentSlideIndex + n); };
+        if (totalSlides > 0) { showSlide(0); } // Initialize carousel
+    </script>
+
+</body>
+
+</html>
