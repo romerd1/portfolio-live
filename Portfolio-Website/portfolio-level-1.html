@@ -1742,7 +1742,12 @@
         function getLayoutScale(root) {
             const ref = CASE_LAYOUT && CASE_LAYOUT.referenceImage;
             const overlay = root.querySelector('.case-image');
-            const width = overlay ? overlay.clientWidth : root.clientWidth;
+            const rootStyle = getComputedStyle(root);
+            const horizontalPadding = (parseFloat(rootStyle.paddingLeft) || 0)
+                + (parseFloat(rootStyle.paddingRight) || 0);
+            const width = overlay
+                ? overlay.clientWidth
+                : Math.max(0, root.clientWidth - horizontalPadding);
             const refW = ref && Number(ref.width) > 0 ? Number(ref.width) : width;
             const ratio = width / refW;
             return {
@@ -1843,8 +1848,13 @@
                         const mediaH = Math.round(spec.media.h * scale.y);
                         frame.style.width = `${mediaW}px`;
                         frame.style.height = `${mediaH}px`;
-                        frame.style.marginLeft = `${Math.round((spec.media.x - box.x) * scale.x)}px`;
-                        frame.style.marginTop = `${Math.round((spec.media.y - box.y) * scale.y)}px`;
+                        const usesPreciseLayout = spec.copy && grid && copy;
+                        frame.style.marginLeft = usesPreciseLayout
+                            ? '0'
+                            : `${Math.round((spec.media.x - box.x) * scale.x)}px`;
+                        frame.style.marginTop = usesPreciseLayout
+                            ? '0'
+                            : `${Math.round((spec.media.y - box.y) * scale.y)}px`;
                     }
 
                     if (spec.copy && spec.media && spec.box && grid && media && copy) {
