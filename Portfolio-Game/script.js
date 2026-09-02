@@ -309,18 +309,18 @@ if (!canvas || !ctx || !fireworksCanvas || !fwCtx || !gameContainer || !startOve
             </div>
             <div class="carousel-slide">
                 <div class="text-content" style="text-align:center; padding: 20px;">
-                    <h2 style="margin-bottom: 20px; line-height: 1.4;">Level 2 - Consensus Canyon Crossing</h2>
-                    <img src="images/microsoft-community-8bit.png" alt="8-bit microsoft logo with connected profile headshots" style="margin: 0 auto 20px auto; max-height: 200px; border: 4px solid #333; box-shadow: 4px 4px 0 #000;">
-                    <p>Building a content design community across Microsoft</p>
+                    <h2 style="margin-bottom: 20px; line-height: 1.4;">Level 2 - The AI Em-Dash</h2>
+                    <img src="images/ai-transformation-8bit.png" alt="8-bit image of a happy person with robotic AI gloves on" style="margin: 0 auto 20px auto; max-height: 200px; border: 4px solid #333; box-shadow: 4px 4px 0 #000;">
+                    <p>Transforming the content design discipline</p>
                     <br>
                     <a href="${urls.portfolioLevel2}" target="_blank" rel="noopener noreferrer" class="warp-btn">Warp to Location*</a>
                 </div>
             </div>
             <div class="carousel-slide">
                 <div class="text-content" style="text-align:center; padding: 20px;">
-                    <h2 style="margin-bottom: 20px; line-height: 1.4;">Level 3 - The AI Em-Dash</h2>
-                    <img src="images/ai-transformation-8bit.png" alt="8-bit image of a happy person with robotic AI gloves on" style="margin: 0 auto 20px auto; max-height: 200px; border: 4px solid #333; box-shadow: 4px 4px 0 #000;">
-                    <p>Transforming the content design discipline</p>
+                    <h2 style="margin-bottom: 20px; line-height: 1.4;">Level 3 - Consensus Canyon Crossing</h2>
+                    <img src="images/microsoft-community-8bit.png" alt="8-bit microsoft logo with connected profile headshots" style="margin: 0 auto 20px auto; max-height: 200px; border: 4px solid #333; box-shadow: 4px 4px 0 #000;">
+                    <p>Building a content design community across Microsoft</p>
                     <br>
                     <a href="${urls.portfolioLevel3}" target="_blank" rel="noopener noreferrer" class="warp-btn">Warp to Location*</a>
                 </div>
