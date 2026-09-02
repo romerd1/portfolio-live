@@ -14,7 +14,7 @@
     <style>
         :root {
             --reference-png-width: 2040;
-            --reference-png-height: 7522;
+            --reference-png-height: 8436;
             --desktop-poster-width: 1196px;
             --font-pixel-head: 'Silkscreen', monospace;
             --font-pixel-body: 'VT323', monospace;
@@ -1152,7 +1152,7 @@
         const QUERY = new URLSearchParams(window.location.search);
         const JSON_EDITOR_MODE = QUERY.get('editor') === '1';
         const SPLIT_MODE = QUERY.get('split') === '1';
-        let RENDER_MODE = QUERY.get('render') === 'image' ? 'image' : 'json';
+        let RENDER_MODE = QUERY.get('render') === 'json' ? 'json' : 'image';
         const STORAGE_KEYS = {
             editorsVisible: 'caseStudyEditorsVisible',
             splitMode: 'caseStudySplitMode'
