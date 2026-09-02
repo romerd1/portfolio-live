@@ -8,9 +8,1068 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Sans+Pro:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/Portfolio-Website/style.css">
+    <style>
+        :root {
+            --reference-png-width: 2040;
+            --reference-png-height: 7522;
+            --desktop-poster-width: 1196px;
+            --font-pixel-head: 'Silkscreen', monospace;
+            --font-pixel-body: 'VT323', monospace;
+            --ink: #25201a;
+            --paper: #f6eecf;
+            --panel-ink: #3c2d22;
+            --accent-red: #c44633;
+            --accent-gold: #b6a069;
+        }
+
+        .case-shell {
+            width: var(--desktop-poster-width);
+            max-width: min(96vw, var(--desktop-poster-width));
+            margin: 0 auto;
+        }
+
+        main {
+            background: transparent;
+        }
+
+        main>section {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+            border: 0;
+        }
+
+        .case-frame {
+            margin-top: 14px;
+            padding: 12px;
+            background:
+                linear-gradient(90deg, rgba(110, 58, 31, 0.68) 0 2px, transparent 2px 100%),
+                linear-gradient(rgba(110, 58, 31, 0.68) 0 2px, transparent 2px 100%),
+                linear-gradient(180deg, #d79b6a 0%, #c97f55 100%);
+            background-size: 36px 36px, 36px 36px, 100% 100%;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .case-frame.split-mode {
+            display: grid;
+            grid-template-columns: minmax(280px, 38%) minmax(0, 1fr);
+            gap: 10px;
+            align-items: start;
+        }
+
+        .case-frame.split-mode .reference-tools {
+            grid-column: 1 / -1;
+            margin-bottom: 0;
+        }
+
+        .case-frame.split-mode .json-runner,
+        .case-frame.split-mode .layout-runner {
+            margin-bottom: 0;
+        }
+
+        .case-frame.split-mode .layout-runner {
+            grid-column: 1;
+        }
+
+        .case-frame.split-mode .json-runner {
+            grid-column: 1;
+        }
+
+        .case-frame.split-mode .case-poster {
+            grid-column: 2;
+            grid-row: 2 / span 2;
+            min-height: 70vh;
+        }
+
+        .reference-tools {
+            margin: 10px 10px 0;
+            padding: 8px 10px;
+            border: 2px solid #2b2119;
+            background: rgba(247, 238, 214, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-family: var(--font-pixel-head);
+            font-size: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .reference-tools[hidden] {
+            display: none;
+        }
+
+        .reference-tools label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .reference-tools label[hidden] {
+            display: none;
+        }
+
+        .reference-tools input[type="range"] {
+            width: 140px;
+        }
+
+        .reference-tools button {
+            border: 2px solid #2b2119;
+            background: #f2e6c3;
+            color: #1e1712;
+            padding: 3px 8px;
+            font-family: var(--font-pixel-head);
+            font-size: 0.46rem;
+            line-height: 1.2;
+            cursor: pointer;
+        }
+
+        .reference-tools button:hover {
+            background: #ead9ae;
+        }
+
+        .json-runner {
+            margin: 10px 10px 0;
+            padding: 10px;
+            border: 2px solid #2b2119;
+            background: rgba(247, 238, 214, 0.94);
+            font-family: var(--font-pixel-head);
+            font-size: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .json-runner[hidden] {
+            display: none;
+        }
+
+        .json-runner-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .json-runner-actions {
+            display: inline-flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .json-runner button {
+            border: 2px solid #2b2119;
+            background: #f2e6c3;
+            color: #1e1712;
+            padding: 4px 8px;
+            font-family: var(--font-pixel-head);
+            font-size: 0.46rem;
+            line-height: 1.2;
+            cursor: pointer;
+        }
+
+        .json-runner button:hover {
+            background: #ead9ae;
+        }
+
+        .json-runner textarea {
+            width: 100%;
+            min-height: 180px;
+            resize: vertical;
+            border: 2px solid #2b2119;
+            background: #fff7df;
+            color: #1e1712;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .json-runner-status {
+            margin-top: 6px;
+            min-height: 1.2em;
+            color: #3b3027;
+        }
+
+        .json-runner-status.error {
+            color: #a12f22;
+        }
+
+        .json-runner-body[hidden] {
+            display: none;
+        }
+
+        .layout-runner {
+            margin: 10px 10px 0;
+            padding: 10px;
+            border: 2px solid #2b2119;
+            background: rgba(247, 238, 214, 0.94);
+            font-family: var(--font-pixel-head);
+            font-size: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .layout-runner[hidden] {
+            display: none;
+        }
+
+        .layout-runner-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .layout-runner-actions {
+            display: inline-flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .layout-runner button {
+            border: 2px solid #2b2119;
+            background: #f2e6c3;
+            color: #1e1712;
+            padding: 4px 8px;
+            font-family: var(--font-pixel-head);
+            font-size: 0.46rem;
+            line-height: 1.2;
+            cursor: pointer;
+        }
+
+        .layout-runner button:hover {
+            background: #ead9ae;
+        }
+
+        .layout-runner textarea {
+            width: 100%;
+            min-height: 160px;
+            resize: vertical;
+            border: 2px solid #2b2119;
+            background: #fff7df;
+            color: #1e1712;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .layout-runner-status {
+            margin-top: 6px;
+            min-height: 1.2em;
+            color: #3b3027;
+        }
+
+        .layout-runner-status.error {
+            color: #a12f22;
+        }
+
+        .layout-runner-body[hidden] {
+            display: none;
+        }
+
+        .case-poster {
+            position: relative;
+            color: var(--ink);
+            overflow: hidden;
+        }
+
+        .case-poster.json-mode {
+            border: 4px solid var(--ink);
+            background: var(--paper);
+            padding: 16px 18px 24px;
+        }
+
+        .case-poster.image-mode {
+            border: 0;
+            background: transparent;
+            padding: 0;
+            line-height: 0;
+        }
+
+        .case-image-stage {
+            position: relative;
+            border: 0;
+            background: transparent;
+            line-height: 0;
+        }
+
+        .case-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .case-image-skeleton {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.18) 45%, rgba(255, 255, 255, 0) 100%),
+                linear-gradient(180deg, #2c2620 0%, #17130f 100%);
+            background-size: 140px 100%, 100% 100%;
+            background-repeat: no-repeat;
+            animation: caseSkeletonScan 1.25s linear infinite;
+        }
+
+        .case-image-stage.loaded .case-image-skeleton {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 180ms ease;
+        }
+
+        .case-hotspots {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .case-hotspot {
+            position: absolute;
+            pointer-events: auto;
+            border: 0;
+            background: transparent;
+            color: transparent;
+            text-decoration: none;
+            outline-offset: 2px;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        .case-hotspot:focus-visible {
+            outline: 2px dashed #ffe2a8;
+            background: rgba(255, 226, 168, 0.15);
+        }
+
+        @keyframes caseSkeletonScan {
+            0% {
+                background-position: -140px 0, 0 0;
+            }
+
+            100% {
+                background-position: calc(100% + 140px) 0, 0 0;
+            }
+        }
+
+        .case-poster figure,
+        .case-poster article {
+            margin: 0;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            background: transparent;
+            color: inherit;
+        }
+
+        .case-poster .case-shot,
+        .case-poster .metrics-card,
+        .case-poster .text-card {
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .case-status {
+            margin: 0;
+            padding: 20px;
+            font-size: 1rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .case-hero {
+            margin-bottom: 16px;
+            border: 3px solid var(--ink);
+            background:
+                repeating-linear-gradient(180deg, rgba(246, 233, 198, 0.11) 0 2px, rgba(13, 9, 7, 0.16) 2px 4px),
+                linear-gradient(180deg, #4a382b 0%, #2b2019 100%);
+            color: #f2e2b8;
+            padding: 10px 12px 8px;
+        }
+
+        .case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .case-tag {
+            border: 1px solid #8f3122;
+            background: var(--accent-red);
+            color: #fff7df;
+            padding: 3px 6px;
+            font-family: var(--font-pixel-head);
+            font-size: 0.42rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .case-title {
+            margin: 0;
+            text-align: left;
+            font-family: var(--font-pixel-head);
+            font-size: 1.08rem;
+            line-height: 1.12;
+            text-transform: uppercase;
+            color: #f2e2b8;
+            text-shadow: 0 2px 0 rgba(0, 0, 0, 0.28);
+            overflow-wrap: anywhere;
+        }
+
+        .case-meta {
+            margin: 8px 0 0;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .case-pill {
+            border: 0;
+            background: transparent;
+            padding: 0;
+            font-family: var(--font-pixel-head);
+            font-size: 0.45rem;
+            color: #ebdeb7;
+            text-transform: uppercase;
+        }
+
+        .case-subtitle {
+            margin-top: 8px;
+            border-top: 1px solid rgba(242, 226, 184, 0.45);
+            padding-top: 8px;
+            font-family: var(--font-pixel-body);
+            font-size: 0.93rem;
+            line-height: 1.18;
+            color: #f0e3bf;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.22);
+            overflow-wrap: anywhere;
+        }
+
+        .case-sections {
+            display: grid;
+            gap: 14px;
+        }
+
+        .case-shot {
+            border-top: 2px dashed rgba(43, 33, 25, 0.4);
+            padding-top: 12px;
+        }
+
+        .shot-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(240px, 0.9fr);
+            gap: 16px;
+            align-items: start;
+        }
+
+        .shot-grid.pin-layout {
+            display: block;
+        }
+
+        .shot-grid.precise-layout {
+            display: block;
+            position: relative;
+        }
+
+        .shot-grid.precise-layout .shot-media,
+        .shot-grid.precise-layout .shot-copy {
+            position: absolute;
+            margin: 0;
+        }
+
+        .case-shot.side-left .shot-grid {
+            grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1fr);
+        }
+
+        .case-shot.side-left .shot-media {
+            order: 2;
+        }
+
+        .case-shot.side-left .shot-copy {
+            order: 1;
+        }
+
+        .shot-media {
+            margin: 0;
+            min-width: 0;
+            position: relative;
+        }
+
+        .shot-media.pin-layout-media {
+            position: relative;
+        }
+
+        .shot-media.pin-layout-media.pin-left {
+            padding-left: 248px;
+        }
+
+        .shot-media.pin-layout-media.pin-right {
+            padding-right: 248px;
+        }
+
+        .shot-frame {
+            position: relative;
+            border: 4px solid var(--ink);
+            background: #d9d9d9;
+            overflow: hidden;
+        }
+
+        .shot-frame.has-pin-callouts {
+            overflow: visible;
+        }
+
+        .shot-step {
+            position: absolute;
+            left: -16px;
+            top: -12px;
+            z-index: 5;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border: 3px solid #2b2119;
+            background: #d9c3a2;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.73rem;
+            line-height: 1;
+        }
+
+        .shot-image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .shot-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .shot-pin {
+            --leader: 74px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        .shot-dot {
+            position: absolute;
+            left: -5px;
+            top: -5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid #2b2119;
+            background: #f9f1dd;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+        }
+
+        .shot-pin.right .shot-dot {
+            left: auto;
+            right: -5px;
+        }
+
+        .shot-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: var(--leader);
+            height: 4px;
+            background: linear-gradient(90deg, #8f4b43 0%, #c16a55 100%);
+            border: 1px solid #2b2119;
+        }
+
+        .shot-line::before {
+            content: "";
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-right: 12px solid #c16a55;
+        }
+
+        .shot-pin.right .shot-line {
+            left: auto;
+            right: 0;
+            background: linear-gradient(90deg, #c16a55 0%, #8f4b43 100%);
+        }
+
+        .shot-pin.right .shot-line::before {
+            left: auto;
+            right: -12px;
+            border-right: 0;
+            border-left: 12px solid #c16a55;
+        }
+
+        .shot-label {
+            position: absolute;
+            top: -20px;
+            left: calc(var(--leader) + 10px);
+            width: min(42vw, 210px);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.48rem;
+            line-height: 1.35;
+            color: #151210;
+            text-shadow: 1px 1px 0 rgba(255, 248, 226, 0.85);
+            overflow-wrap: anywhere;
+        }
+
+        .shot-pin-layout-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .shot-pin-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .shot-anno {
+            position: absolute;
+            width: 214px;
+            font-family: var(--font-pixel-head);
+            font-size: 0.42rem;
+            line-height: 1.18;
+            z-index: 5;
+            text-align: left;
+        }
+
+        .shot-anno.left {
+            text-align: right;
+        }
+
+        .shot-anno-box {
+            border: 2px solid var(--accent-red);
+            background: #f8efd6;
+            padding: 4px 7px;
+            color: #251d17;
+            overflow-wrap: anywhere;
+        }
+
+        .shot-anno-box h1,
+        .shot-anno-box h2,
+        .shot-anno-box h3,
+        .shot-anno-box p {
+            margin: 0;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .shot-stamp {
+            position: absolute;
+            top: 14px;
+            width: 54px;
+            height: 54px;
+            border: 3px solid #fff5de;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-pixel-head);
+            font-size: 1.28rem;
+            line-height: 1;
+            z-index: 6;
+        }
+
+        .shot-stamp.before {
+            right: 12px;
+            background: #d43f2c;
+            color: #fff;
+        }
+
+        .shot-stamp.after {
+            left: 12px;
+            background: #2f8a3e;
+            color: #fff;
+        }
+
+        .shot-label h1,
+        .shot-label h2,
+        .shot-label h3,
+        .shot-label p,
+        .shot-copy h1,
+        .shot-copy h2,
+        .shot-copy h3,
+        .shot-copy p,
+        .text-card h1,
+        .text-card h2,
+        .text-card h3,
+        .text-card p,
+        .text-card li {
+            margin: 0;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .shot-label p+p,
+        .shot-copy p+p,
+        .text-card p+p {
+            margin-top: 10px;
+        }
+
+        .shot-pin.right .shot-label {
+            left: auto;
+            right: calc(var(--leader) + 10px);
+            text-align: right;
+        }
+
+        .shot-caption {
+            margin-top: 7px;
+            font-size: 0.78rem;
+            color: #665949;
+        }
+
+        .shot-copy {
+            min-width: 0;
+            padding-top: 2px;
+        }
+
+        .shot-copy .text-block {
+            font-family: var(--font-pixel-body);
+            font-size: var(--shot-copy-body-size, 0.95rem);
+            line-height: var(--shot-copy-line, 1.04);
+            letter-spacing: 0.01em;
+            color: #1c1713;
+        }
+
+        .shot-copy .text-block h1,
+        .shot-copy .text-block h2 {
+            font-family: var(--font-pixel-body);
+            font-size: var(--shot-copy-heading-size, 1.03rem);
+            line-height: var(--shot-copy-line, 1.02);
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .shot-copy .text-block p:empty,
+        .shot-anno-box p:empty {
+            display: none;
+        }
+
+        .metrics-card,
+        .text-card {
+            border-top: 2px dashed rgba(43, 33, 25, 0.4);
+            padding-top: 12px;
+        }
+
+        .section-heading {
+            margin: 0 0 10px;
+            font-family: var(--font-pixel-head);
+            font-size: 0.66rem;
+            line-height: 1.22;
+            text-transform: uppercase;
+            overflow-wrap: anywhere;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            align-items: start;
+        }
+
+        .metric-item {
+            border: 2px solid #b9a06e;
+            background: rgba(248, 238, 206, 0.95);
+            padding: 7px 8px 7px;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 4px;
+        }
+
+        .metric-label {
+            margin: 0;
+            font-family: var(--font-pixel-head);
+            font-size: var(--metric-label-size, 0.4rem);
+            text-transform: uppercase;
+            color: #6d5e4b;
+        }
+
+        .metric-value {
+            margin: 4px 0 2px;
+            font-family: var(--font-pixel-head);
+            font-size: var(--metric-value-size, 0.6rem);
+            line-height: 1.2;
+            color: #1f1a16;
+            overflow-wrap: anywhere;
+        }
+
+        .metric-value.green {
+            color: #1d7a36;
+        }
+
+        .metric-desc {
+            margin: 0;
+            font-family: var(--font-pixel-head);
+            font-size: var(--metric-desc-size, 0.31rem);
+            line-height: var(--metric-desc-line, 1.3);
+            overflow-wrap: anywhere;
+        }
+
+        .metrics-card.primary .metric-item {
+            min-height: 0;
+        }
+
+        .metrics-card.primary .metric-value {
+            font-size: 0.58rem;
+        }
+
+        .metrics-card.secondary .metric-item {
+            min-height: 0;
+        }
+
+        .metrics-card.secondary .metric-value {
+            font-size: 0.54rem;
+            line-height: 1.18;
+        }
+
+        .text-card {
+            position: relative;
+            border: 3px solid var(--accent-gold);
+            padding: 10px 14px;
+            background: #f4ebcb;
+            width: 94%;
+            margin: 0 auto;
+        }
+
+        .text-card.narrative {
+            width: 100%;
+            padding: 12px 14px 12px 24px;
+            background: #f2e8c5;
+        }
+
+        .text-card.closing {
+            width: 90%;
+            background: #f5ebc8;
+        }
+
+        .text-stamp {
+            position: absolute;
+            top: 30px;
+            width: 44px;
+            height: 44px;
+            border: 3px solid #b59a63;
+            background: #2a1e16;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            line-height: 1;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.22);
+        }
+
+        .text-stamp.left {
+            left: -26px;
+        }
+
+        .text-stamp.right {
+            right: -26px;
+        }
+
+        .text-card.narrative .text-stamp.left {
+            top: 56px;
+            left: -38px;
+            width: 56px;
+            height: 56px;
+            font-size: 1.3rem;
+        }
+
+        .text-card.closing .text-stamp.right {
+            top: 44px;
+            right: -38px;
+            width: 56px;
+            height: 56px;
+            font-size: 1.2rem;
+        }
+
+        .text-content {
+            font-family: var(--font-pixel-head);
+            font-size: 0.45rem;
+            line-height: 1.42;
+            color: #221d17;
+        }
+
+        .text-content h1,
+        .text-content h2,
+        .text-content h3 {
+            margin: 0 0 8px;
+            font-family: var(--font-pixel-head);
+            font-size: var(--text-heading-size, 0.76rem);
+            line-height: 1.12;
+            text-transform: uppercase;
+        }
+
+        .text-card.closing .text-content h1,
+        .text-card.closing .text-content h2,
+        .text-card.closing .text-content h3 {
+            font-size: 0.72rem;
+        }
+
+        .text-content p,
+        .text-content li {
+            margin: 0;
+            font-size: var(--text-body-size, 0.46rem);
+            line-height: var(--text-body-line, 1.55);
+        }
+
+        .text-card.narrative .text-content,
+        .text-card.narrative .text-content p,
+        .text-card.narrative .text-content li {
+            font-size: 0.43rem;
+            line-height: 1.48;
+        }
+
+        .text-card.closing .text-content,
+        .text-card.closing .text-content p,
+        .text-card.closing .text-content li {
+            font-size: 0.42rem;
+            line-height: 1.46;
+        }
+
+        .text-content p+p {
+            margin-top: 10px;
+        }
+
+        .shot-copy.lessons-copy .text-block {
+            font-size: 0.46rem;
+            line-height: 1.42;
+        }
+
+        .shot-copy.lessons-copy .text-block h1,
+        .shot-copy.lessons-copy .text-block h2,
+        .shot-copy.lessons-copy .text-block h3 {
+            font-size: 0.72rem;
+            margin-bottom: 6px;
+        }
+
+        .shot-copy.lessons-copy li+li {
+            margin-top: 6px;
+        }
+
+        .text-content ol,
+        .text-content ul {
+            margin: 10px 0;
+            padding-left: 24px;
+        }
+
+        .text-content li+li {
+            margin-top: 8px;
+        }
+
+        @media (max-width: 760px) {
+            .case-frame.split-mode {
+                display: block;
+            }
+
+            .case-shell {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .reference-tools {
+                font-size: 0.46rem;
+            }
+
+            .case-poster {
+                padding: 18px 14px 24px;
+            }
+
+            .case-title {
+                font-size: 1rem;
+            }
+
+            .shot-grid,
+            .case-shot.side-left .shot-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .case-shot.side-left .shot-media,
+            .case-shot.side-left .shot-copy {
+                order: unset;
+            }
+
+            .shot-anno {
+                position: static;
+                width: auto;
+                margin-top: 8px;
+                text-align: left;
+            }
+
+            .shot-media.pin-layout-media.pin-left,
+            .shot-media.pin-layout-media.pin-right {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .shot-pin-layout-overlay,
+            .shot-step {
+                display: none;
+            }
+
+            .shot-frame.has-pin-callouts {
+                overflow: hidden;
+            }
+
+            .shot-stamp {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .case-frame {
+                padding: 8px;
+            }
+
+            .case-title {
+                font-size: 0.84rem;
+            }
+
+            .shot-copy .text-block h1,
+            .shot-copy .text-block h2 {
+                font-size: 0.66rem;
+            }
+
+            .section-heading {
+                font-size: 0.66rem;
+            }
+
+            .metric-value {
+                font-size: 0.66rem;
+            }
+
+            .text-content {
+                font-size: 0.42rem;
+            }
+
+            .text-card {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -30,40 +1089,48 @@
 
     <main>
         <section>
-            <div class="container">
-                <div class="section-body-padded">
-                    <img src="/Portfolio-Website/UW-building.png" alt="8-bit university building" class="hero-image">
-
-                    <div class="text-content">
-                        <h2>Project Overview</h2>
-                        <p>A deep dive into my work developing and teaching the content design curriculum for the
-                            University of Washington's Communication Leadership master's program. This involved creating
-                            course materials, lectures, and assignments focused on real-world UX writing and content
-                            strategy principles.</p>
-
-                        <h2>The Challenge</h2>
-                        <p>Students needed more than writing tips. They needed to learn how content decisions affect
-                            product systems, user trust, and business outcomes in real shipping environments. The
-                            challenge was building a graduate experience that balanced strategic thinking, practical
-                            tooling, and accessibility expectations within a single quarter timeline.</p>
-
-                        <h2>My Approach</h2>
-                        <p>I designed the course like a product sprint: clear learning outcomes, iterative critique,
-                            and portfolio-ready deliverables tied to real constraints. Each module connected user
-                            psychology, content architecture, and AI-informed workflow decisions so students could learn
-                            how to make tradeoffs with confidence.</p>
-                        <ul>
-                            <li>Structured weekly design critiques</li>
-                            <li>Systems-thinking content frameworks</li>
-                            <li>Accessibility and trust-first writing standards</li>
-                        </ul>
-
-                        <h2>Outcomes & Metrics</h2>
-                        <p>The program produced stronger portfolio narratives and more strategic case studies from
-                            students entering tech-focused roles. Learners left with a repeatable method for solving
-                            complex content problems, and the curriculum established a clearer bridge between academic
-                            learning and enterprise product practice.</p>
+            <div class="container case-shell">
+                <div class="case-frame">
+                    <div class="reference-tools" aria-label="Case study controls">
+                        <label id="split-toggle-label" hidden><input id="split-toggle" type="checkbox"> Split
+                            Mode</label>
+                        <button id="editor-toggle" type="button" hidden>Edit Data</button>
+                        <button id="render-mode-toggle" type="button" hidden>Use JSON Render</button>
+                        <button id="view-reset" type="button" hidden>Reset View</button>
                     </div>
+                    <div id="json-runner" class="json-runner" aria-label="JSON runner controls" hidden>
+                        <div class="json-runner-head">
+                            <strong>JSON Runner (Editable)</strong>
+                            <div class="json-runner-actions">
+                                <button id="json-runner-run" type="button">Run JSON</button>
+                                <button id="json-runner-reset" type="button">Reset</button>
+                                <button id="json-runner-download" type="button">Download</button>
+                                <button id="json-runner-collapse" type="button">Collapse</button>
+                            </div>
+                        </div>
+                        <div id="json-runner-body" class="json-runner-body">
+                            <textarea id="json-runner-input" spellcheck="false"></textarea>
+                            <p id="json-runner-status" class="json-runner-status" aria-live="polite"></p>
+                        </div>
+                    </div>
+                    <div id="layout-runner" class="layout-runner" aria-label="Layout JSON runner controls" hidden>
+                        <div class="layout-runner-head">
+                            <strong>Layout Runner (Editable Coordinates)</strong>
+                            <div class="layout-runner-actions">
+                                <button id="layout-runner-run" type="button">Run Layout</button>
+                                <button id="layout-runner-reset" type="button">Reset</button>
+                                <button id="layout-runner-download" type="button">Download</button>
+                                <button id="layout-runner-collapse" type="button">Collapse</button>
+                            </div>
+                        </div>
+                        <div id="layout-runner-body" class="layout-runner-body">
+                            <textarea id="layout-runner-input" spellcheck="false"></textarea>
+                            <p id="layout-runner-status" class="layout-runner-status" aria-live="polite"></p>
+                        </div>
+                    </div>
+                    <article id="case-poster" class="case-poster" aria-live="polite">
+                        <p class="case-status">Loading case study data...</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -76,8 +1143,1106 @@
     </footer>
 
     <script>
-        // --- Footer Year ---
+        const CASE_DATA_URL = '/Portfolio-Website/level-1-case-study-1/whens-a-good-time-to-interrupt-the-user.casestudy-data.json';
+        const CASE_LAYOUT_URL = '/Portfolio-Website/level-1-case-study-1/whens-a-good-time-to-interrupt-the-user.layout.json';
+        const REFERENCE_PNG_FALLBACK_URL = '/Portfolio-Website/level-1-case-study-1/interrupt-the-user-casestudy-image-8-6.png';
+        const SHOW_CAPTIONS = false;
+        const SHOW_STEP_BADGES = false;
+        const pinLayoutJobs = [];
+        const QUERY = new URLSearchParams(window.location.search);
+        const JSON_EDITOR_MODE = QUERY.get('editor') === '1';
+        const SPLIT_MODE = QUERY.get('split') === '1';
+        let RENDER_MODE = QUERY.get('render') === 'image' ? 'image' : 'json';
+        const STORAGE_KEYS = {
+            editorsVisible: 'caseStudyEditorsVisible',
+            splitMode: 'caseStudySplitMode'
+        };
+        let CASE_LAYOUT = null;
+        let CASE_SOURCE_DATA = null;
+        let CASE_SOURCE_LAYOUT = null;
+
+        function nodeFromHTML(html) {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html || '';
+            return wrapper;
+        }
+
+        function safeText(text) {
+            return (text || '').toString();
+        }
+
+        function stripHtmlText(html) {
+            const node = document.createElement('div');
+            node.innerHTML = safeText(html);
+            return (node.textContent || '').trim();
+        }
+
+        function toPct(value, base) {
+            const num = Number(value);
+            if (!Number.isFinite(num) || num < 0) {
+                return null;
+            }
+            if (num <= 1) {
+                return num * 100;
+            }
+            if (num <= 100) {
+                return num;
+            }
+            if (base > 0) {
+                return (num / base) * 100;
+            }
+            return null;
+        }
+
+        function buildImageHotspots(data, transcriptEl) {
+            const hotspots = Array.isArray(data && data.imageHotspots)
+                ? data.imageHotspots
+                : (Array.isArray(data && data.hotspots) ? data.hotspots : []);
+
+            if (!hotspots.length) {
+                return null;
+            }
+
+            const layer = document.createElement('div');
+            layer.className = 'case-hotspots';
+
+            hotspots.forEach((spot, idx) => {
+                const x = toPct(spot.x, Number(getComputedStyle(document.documentElement).getPropertyValue('--reference-png-width')) || 2040);
+                const y = toPct(spot.y, Number(getComputedStyle(document.documentElement).getPropertyValue('--reference-png-height')) || 7522);
+                const w = toPct(spot.w, Number(getComputedStyle(document.documentElement).getPropertyValue('--reference-png-width')) || 2040);
+                const h = toPct(spot.h, Number(getComputedStyle(document.documentElement).getPropertyValue('--reference-png-height')) || 7522);
+
+                if ([x, y, w, h].some((v) => v === null)) {
+                    return;
+                }
+
+                const label = safeText(spot.label || `Hotspot ${idx + 1}`);
+                const action = safeText(spot.action).toLowerCase();
+                const href = safeText(spot.url || spot.href);
+                const isLink = !!href;
+                const node = isLink ? document.createElement('a') : document.createElement('button');
+                node.className = 'case-hotspot';
+                node.setAttribute('aria-label', label);
+                node.style.left = `${x}%`;
+                node.style.top = `${y}%`;
+                node.style.width = `${w}%`;
+                node.style.height = `${h}%`;
+                node.textContent = label;
+
+                if (isLink) {
+                    node.href = href;
+                    if (safeText(spot.target) === '_self') {
+                        node.target = '_self';
+                    } else {
+                        node.target = '_blank';
+                        node.rel = 'noopener noreferrer';
+                    }
+                } else {
+                    node.type = 'button';
+                    node.addEventListener('click', () => {
+                        if (!transcriptEl) {
+                            return;
+                        }
+                        if (action === 'opentranscript') {
+                            transcriptEl.open = true;
+                            transcriptEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            return;
+                        }
+                        transcriptEl.open = !transcriptEl.open;
+                    });
+                }
+
+                layer.appendChild(node);
+            });
+
+            return layer.childElementCount ? layer : null;
+        }
+
+        function calloutDirection(callout, defaultSide) {
+            if (callout && typeof callout.labelX === 'number' && callout.labelX > (callout.pinX || 0)) {
+                return 'right';
+            }
+            if (callout && typeof callout.labelX === 'number' && callout.labelX < (callout.pinX || 0)) {
+                return 'left';
+            }
+            return defaultSide === 'left' ? 'left' : 'right';
+        }
+
+        function renderHero(section) {
+            const hero = document.createElement('section');
+            hero.className = 'case-hero';
+
+            if (Array.isArray(section.tags) && section.tags.length) {
+                const tags = document.createElement('div');
+                tags.className = 'case-tags';
+                section.tags.forEach((tag) => {
+                    const t = document.createElement('span');
+                    t.className = 'case-tag';
+                    t.textContent = safeText(tag);
+                    tags.appendChild(t);
+                });
+                hero.appendChild(tags);
+            }
+
+            const title = document.createElement('h2');
+            title.className = 'case-title';
+            title.textContent = safeText(section.title);
+            hero.appendChild(title);
+
+            const meta = document.createElement('div');
+            meta.className = 'case-meta';
+
+            if (section.client) {
+                const client = document.createElement('span');
+                client.className = 'case-pill';
+                client.textContent = `${safeText(section.clientLabel || 'Client')}: ${safeText(section.client)}`;
+                meta.appendChild(client);
+            }
+
+            if (section.year) {
+                const year = document.createElement('span');
+                year.className = 'case-pill';
+                year.textContent = `Year: ${safeText(section.year)}`;
+                meta.appendChild(year);
+            }
+
+            if (meta.childElementCount > 0) {
+                hero.appendChild(meta);
+            }
+
+            if (section.subtitle) {
+                const subtitle = document.createElement('div');
+                subtitle.className = 'case-subtitle';
+                subtitle.appendChild(nodeFromHTML(section.subtitle));
+                hero.appendChild(subtitle);
+            }
+
+            return hero;
+        }
+
+        function renderShot(section, stepNumber) {
+            const shotSection = document.createElement('section');
+            shotSection.dataset.sectionId = safeText(section.id);
+            const side = safeText(section.labelSide).toLowerCase() === 'left' ? 'left' : 'right';
+            shotSection.className = `case-shot side-${side}`;
+
+            const grid = document.createElement('div');
+            grid.className = 'shot-grid';
+
+            const media = document.createElement('figure');
+            media.className = 'shot-media';
+
+            const frame = document.createElement('div');
+            frame.className = 'shot-frame';
+
+            if (SHOW_STEP_BADGES && stepNumber > 0 && stepNumber <= 4) {
+                const badge = document.createElement('span');
+                badge.className = 'shot-step';
+                badge.textContent = safeText(stepNumber);
+                frame.appendChild(badge);
+            }
+
+            const img = document.createElement('img');
+            img.className = 'shot-image';
+            img.src = safeText(section.imageUrl);
+            img.alt = safeText(section.caption || 'Case study screenshot');
+            frame.appendChild(img);
+
+            const overlay = document.createElement('div');
+            overlay.className = 'shot-overlay';
+
+            const copy = document.createElement('div');
+            copy.className = 'shot-copy';
+
+            const textCallouts = [];
+            const pinCallouts = [];
+            (Array.isArray(section.callouts) ? section.callouts : []).forEach((callout) => {
+                if (callout.type === 'pin' && typeof callout.pinX === 'number' && typeof callout.pinY === 'number') {
+                    pinCallouts.push(callout);
+                } else {
+                    textCallouts.push(callout);
+                }
+            });
+
+            const usePinLayout = pinCallouts.length > 0 && textCallouts.length === 0;
+            if (usePinLayout) {
+                grid.classList.add('pin-layout');
+                media.classList.add('pin-layout-media', `pin-${side}`);
+            }
+
+            if (pinCallouts.length > 0) {
+                frame.classList.add('has-pin-callouts');
+                const laneCount = pinCallouts.length;
+                const laneStart = 24;
+                const laneEnd = 76;
+                const laneGap = laneCount > 1 ? (laneEnd - laneStart) / (laneCount - 1) : 0;
+
+                const pinOverlay = document.createElement('div');
+                pinOverlay.className = 'shot-pin-layout-overlay';
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('class', 'shot-pin-svg');
+                pinOverlay.appendChild(svg);
+                media.appendChild(pinOverlay);
+
+                pinCallouts.forEach((callout, idx) => {
+                    const pinX = Math.max(0, Math.min(100, callout.pinX || 0));
+                    const pinY = Math.max(0, Math.min(100, callout.pinY || 0));
+                    const labelY = laneCount >= 3
+                        ? Math.max(10, Math.min(90, laneStart + laneGap * idx))
+                        : pinY;
+
+                    const anno = document.createElement('div');
+                    anno.className = `shot-anno ${side}`;
+                    anno.dataset.calloutId = safeText(callout.id);
+                    anno.dataset.pinX = String(pinX);
+                    anno.dataset.pinY = String(pinY);
+                    anno.dataset.labelY = String(labelY);
+
+                    const box = document.createElement('div');
+                    box.className = 'shot-anno-box';
+                    box.appendChild(nodeFromHTML(callout.text));
+                    anno.appendChild(box);
+
+                    pinOverlay.appendChild(anno);
+                });
+
+                pinLayoutJobs.push(() => {
+                    const mediaW = media.clientWidth;
+                    const mediaH = media.clientHeight;
+                    const frameX = frame.offsetLeft;
+                    const frameY = frame.offsetTop;
+                    const frameW = frame.clientWidth;
+                    const frameH = frame.clientHeight;
+                    if (!mediaW || !mediaH || !frameW || !frameH) {
+                        return;
+                    }
+
+                    svg.setAttribute('viewBox', `0 0 ${mediaW} ${mediaH}`);
+                    svg.setAttribute('width', String(mediaW));
+                    svg.setAttribute('height', String(mediaH));
+
+                    const annos = Array.from(pinOverlay.querySelectorAll('.shot-anno'));
+                    const paths = [];
+                    annos.forEach((anno) => {
+                        const pinX = Number(anno.dataset.pinX || 0);
+                        const pinY = Number(anno.dataset.pinY || 0);
+                        const labelY = Number(anno.dataset.labelY || 0);
+
+                        const pinAbsX = frameX + (frameW * pinX / 100);
+                        const pinAbsY = frameY + (frameH * pinY / 100);
+                        const labelCenterY = frameY + (frameH * labelY / 100);
+
+                        const boxW = anno.offsetWidth;
+                        const boxH = anno.offsetHeight;
+                        const boxX = side === 'left' ? 0 : mediaW - boxW;
+                        const boxY = Math.max(0, Math.min(mediaH - boxH, labelCenterY - boxH / 2));
+
+                        anno.style.left = `${boxX}px`;
+                        anno.style.top = `${boxY}px`;
+
+                        const startX = side === 'left' ? boxX + boxW : boxX;
+                        const startY = boxY + boxH / 2;
+                        const bendX = side === 'left'
+                            ? Math.max(startX + 6, Math.min(startX + 58, pinAbsX - 16))
+                            : Math.min(startX - 6, Math.max(startX - 58, pinAbsX + 16));
+
+                        const path = `M ${startX} ${startY} H ${bendX} V ${pinAbsY} H ${pinAbsX}`;
+                        const markerId = side === 'left' ? 'arrow-right' : 'arrow-left';
+
+                        paths.push(`<path d="${path}" fill="none" stroke="#d44f35" stroke-width="1.6" marker-end="url(#${markerId})" />`);
+                        paths.push(`<circle cx="${pinAbsX}" cy="${pinAbsY}" r="3" fill="#d44f35" stroke="#fff5de" stroke-width="1.5" />`);
+                    });
+
+                    svg.innerHTML = `
+                        <defs>
+                            <marker id="arrow-right" markerWidth="6" markerHeight="6" refX="6" refY="0" orient="auto" markerUnits="strokeWidth"> 
+                                <polygon points="0,-3 6,0 0,3" fill="#d44f35"></polygon>
+                            </marker>
+                            <marker id="arrow-left" markerWidth="6" markerHeight="6" refX="0" refY="0" orient="auto" markerUnits="strokeWidth"> 
+                                <polygon points="6,-3 0,0 6,3" fill="#d44f35"></polygon>
+                            </marker>
+                        </defs>
+                        ${paths.join('')}
+                    `;
+                });
+            }
+
+            if (section.stamp && section.stamp.style === 'icon') {
+                const stamp = document.createElement('span');
+                const value = safeText(section.stamp.value).toLowerCase();
+                stamp.className = `shot-stamp ${value === 'after' ? 'after' : 'before'}`;
+                stamp.textContent = value === 'after' ? '✓' : '✕';
+                stamp.setAttribute('aria-hidden', 'true');
+                frame.appendChild(stamp);
+            }
+
+            frame.appendChild(overlay);
+            media.appendChild(frame);
+
+            if (SHOW_CAPTIONS && section.caption) {
+                const cap = document.createElement('figcaption');
+                cap.className = 'shot-caption';
+                cap.textContent = safeText(section.caption);
+                media.appendChild(cap);
+            }
+
+            if (textCallouts.length > 0) {
+                const mergedText = textCallouts.map((c) => safeText(c.text).toLowerCase()).join(' ');
+                if (!section.labelSide && mergedText.includes('lessons learned')) {
+                    copy.classList.add('lessons-copy');
+                }
+                textCallouts.forEach((callout) => {
+                    const block = document.createElement('div');
+                    block.className = 'text-block';
+                    block.appendChild(nodeFromHTML(callout.text));
+                    copy.appendChild(block);
+                });
+            } else if (pinCallouts.length === 0) {
+                const note = document.createElement('p');
+                note.className = 'text-block';
+                note.textContent = 'Add screenshot callouts in your JSON.';
+                copy.appendChild(note);
+            }
+
+            grid.appendChild(media);
+            if (textCallouts.length > 0 || pinCallouts.length === 0) {
+                grid.appendChild(copy);
+            }
+            shotSection.appendChild(grid);
+            return shotSection;
+        }
+
+        function renderMetrics(section) {
+            const metrics = document.createElement('section');
+            metrics.className = 'metrics-card';
+            metrics.dataset.sectionId = safeText(section.id);
+
+            const headingText = safeText(section.heading).toLowerCase();
+            if (headingText.includes('new key results')) {
+                metrics.classList.add('secondary');
+            } else {
+                metrics.classList.add('primary');
+            }
+
+            const heading = document.createElement('h3');
+            heading.className = 'section-heading';
+            heading.textContent = safeText(section.heading || 'Metrics');
+            metrics.appendChild(heading);
+
+            const grid = document.createElement('div');
+            grid.className = 'metrics-grid';
+
+            (Array.isArray(section.items) ? section.items : []).forEach((item) => {
+                const card = document.createElement('article');
+                card.className = 'metric-item';
+                card.dataset.itemId = safeText(item.id);
+
+                const label = document.createElement('p');
+                label.className = 'metric-label';
+                label.textContent = safeText(item.label);
+                card.appendChild(label);
+
+                const value = document.createElement('p');
+                value.className = `metric-value ${safeText(item.valueColor).toLowerCase() === 'green' ? 'green' : ''}`;
+                value.textContent = safeText(item.value);
+                card.appendChild(value);
+
+                const desc = document.createElement('p');
+                desc.className = 'metric-desc';
+                desc.textContent = safeText(item.description);
+                card.appendChild(desc);
+
+                grid.appendChild(card);
+            });
+
+            metrics.appendChild(grid);
+            return metrics;
+        }
+
+        function renderText(section) {
+            const text = document.createElement('section');
+            text.className = 'text-card';
+            text.dataset.sectionId = safeText(section.id);
+
+            const headingText = safeText(section.heading).toLowerCase();
+            if (headingText.includes('failure')) {
+                text.classList.add('narrative');
+            }
+            if (headingText.includes('concrete') || headingText.includes('juiced my impact')) {
+                text.classList.add('closing');
+            }
+
+            if (section.textStamp && section.textStamp.emoji) {
+                const stamp = document.createElement('span');
+                const side = safeText(section.textStamp.side).toLowerCase() === 'left' ? 'left' : 'right';
+                stamp.className = `text-stamp ${side}`;
+                stamp.setAttribute('aria-hidden', 'true');
+                stamp.textContent = safeText(section.textStamp.emoji);
+                text.appendChild(stamp);
+            }
+
+            const heading = document.createElement('h3');
+            heading.className = 'section-heading';
+            heading.textContent = safeText(section.heading || 'Notes');
+            text.appendChild(heading);
+
+            const content = document.createElement('div');
+            content.className = 'text-content';
+            content.appendChild(nodeFromHTML(section.content || ''));
+            text.appendChild(content);
+
+            return text;
+        }
+
+        function renderCaseStudy(data) {
+            const root = document.getElementById('case-poster');
+            root.innerHTML = '';
+            root.classList.remove('image-mode');
+            root.classList.add('json-mode');
+            pinLayoutJobs.length = 0;
+
+            const sectionsWrap = document.createElement('div');
+            sectionsWrap.className = 'case-sections';
+
+            const sections = Array.isArray(data.sections) ? data.sections : [];
+            let screenshotStep = 0;
+            sections.forEach((section) => {
+                if (section.type === 'hero') {
+                    sectionsWrap.appendChild(renderHero(section));
+                    return;
+                }
+                if (section.type === 'screenshot') {
+                    screenshotStep += 1;
+                    sectionsWrap.appendChild(renderShot(section, screenshotStep));
+                    return;
+                }
+                if (section.type === 'metrics') {
+                    sectionsWrap.appendChild(renderMetrics(section));
+                    return;
+                }
+                if (section.type === 'text') {
+                    sectionsWrap.appendChild(renderText(section));
+                }
+            });
+
+            root.appendChild(sectionsWrap);
+            scheduleLayoutPass(root);
+        }
+
+        function renderCaseStudyImage(data) {
+            const root = document.getElementById('case-poster');
+            root.innerHTML = '';
+            root.classList.remove('json-mode');
+            root.classList.add('image-mode');
+            pinLayoutJobs.length = 0;
+
+            const stage = document.createElement('figure');
+            stage.className = 'case-image-stage';
+
+            const skeleton = document.createElement('div');
+            skeleton.className = 'case-image-skeleton';
+            skeleton.setAttribute('aria-hidden', 'true');
+            stage.appendChild(skeleton);
+
+            const img = document.createElement('img');
+            img.className = 'case-image';
+            img.src = getReferencePngUrl();
+            img.alt = 'Case study visual exported from Figma';
+            img.addEventListener('load', () => {
+                stage.classList.add('loaded');
+                verifyReferenceImage(img);
+            }, { once: true });
+            img.addEventListener('error', () => {
+                stage.classList.add('loaded');
+                reportReferenceProblem('Reference poster failed to load: ' + img.getAttribute('src'));
+            }, { once: true });
+            stage.appendChild(img);
+            root.appendChild(stage);
+
+            const hotspots = buildImageHotspots(data, null);
+            if (hotspots) {
+                stage.appendChild(hotspots);
+            }
+        }
+
+        function renderActiveMode(data) {
+            if (RENDER_MODE === 'json') {
+                renderCaseStudy(data);
+                return;
+            }
+            renderCaseStudyImage(data);
+        }
+
+        function getReferencePngUrl() {
+            const ref = CASE_LAYOUT && CASE_LAYOUT.referenceImage;
+            const url = ref && typeof ref.url === 'string' ? ref.url.trim() : '';
+            return url || REFERENCE_PNG_FALLBACK_URL;
+        }
+
+        function fileName(url) {
+            return String(url || '').split('/').pop();
+        }
+
+        function reportReferenceProblem(message) {
+            console.warn('[case-study] ' + message);
+            if (!JSON_EDITOR_MODE) {
+                return;
+            }
+            const tools = document.querySelector('.reference-tools');
+            if (!tools) {
+                return;
+            }
+            let banner = document.getElementById('reference-warning');
+            if (!banner) {
+                banner = document.createElement('p');
+                banner.id = 'reference-warning';
+                banner.style.cssText = 'flex:1 0 100%;margin:6px 0 0;padding:5px 8px;background:#3a1d18;'
+                    + 'border-left:4px solid var(--accent-red);color:#f4d9c8;font-size:0.5rem;line-height:1.5;';
+                tools.appendChild(banner);
+            }
+            banner.textContent = message;
+        }
+
+        // The layout coordinates live in the reference poster's pixel space. If the
+        // poster is re-exported without re-authoring the coordinates, every section
+        // silently lands in the wrong place -- so say so loudly instead.
+        function checkReferenceConsistency() {
+            const ref = CASE_LAYOUT && CASE_LAYOUT.referenceImage;
+            if (!ref || typeof ref.url !== 'string' || !ref.url.trim()) {
+                return;
+            }
+            const declared = fileName(ref.url);
+            const fallback = fileName(REFERENCE_PNG_FALLBACK_URL);
+            if (declared !== fallback) {
+                reportReferenceProblem('layout.json points at "' + declared
+                    + '" but the page ships "' + fallback + '". Using "' + declared + '".');
+            }
+        }
+
+        function verifyReferenceImage(img) {
+            const ref = CASE_LAYOUT && CASE_LAYOUT.referenceImage;
+            if (!ref || !img.naturalWidth) {
+                return;
+            }
+            const name = fileName(img.getAttribute('src'));
+            const declaredW = Number(ref.width);
+            const declaredH = Number(ref.height);
+            if (declaredW > 0 && declaredW !== img.naturalWidth) {
+                reportReferenceProblem('Layout coordinate space is ' + declaredW + 'px wide but '
+                    + name + ' is ' + img.naturalWidth + 'px. Section positions will be scaled wrong.');
+            }
+            if (declaredH > 0 && declaredH !== img.naturalHeight) {
+                const pct = Math.round((declaredH / img.naturalHeight) * 100);
+                reportReferenceProblem('Layout coordinate space is ' + declaredH + 'px tall but '
+                    + name + ' is ' + img.naturalHeight + 'px -- the layout covers only the top '
+                    + pct + '% of the poster. Re-author the coordinates against ' + name + '.');
+            }
+        }
+
+        function getLayoutScale(root) {
+            const ref = CASE_LAYOUT && CASE_LAYOUT.referenceImage;
+            const overlay = root.querySelector('.case-image');
+            const width = overlay ? overlay.clientWidth : root.clientWidth;
+            const refW = ref && Number(ref.width) > 0 ? Number(ref.width) : width;
+            const ratio = width / refW;
+            return {
+                x: ratio,
+                y: ratio
+            };
+        }
+
+        // requestAnimationFrame never fires while the page is hidden, so a case
+        // study opened in a BACKGROUND tab (cmd-click from the portfolio carousel)
+        // rendered with the reference layout never applied, and stayed that way
+        // until something forced a resize. rAF is still the right moment when the
+        // page is visible; a timer backs it up because timers DO fire when hidden.
+        // The pass only writes inline styles, so running it twice is harmless.
+        function scheduleLayoutPass(root) {
+            const pass = () => {
+                applyReferenceLayout(root);
+                pinLayoutJobs.forEach((job) => job());
+            };
+            requestAnimationFrame(pass);
+            setTimeout(pass, 250);
+        }
+
+        function applyReferenceLayout(root) {
+            if (!CASE_LAYOUT || !CASE_LAYOUT.coordinates) {
+                return;
+            }
+
+            const scale = getLayoutScale(root);
+            const coords = CASE_LAYOUT.coordinates;
+            const gapResetAnchors = new Set([
+                'e6cd1c85-b8c8-43e6-92e1-cb2be41fa4ca'
+            ]);
+            const sectionSequence = Array.from(root.querySelectorAll('.case-sections > section[data-section-id]'));
+            let prevRefY = null;
+            let prevRefH = null;
+
+            sectionSequence.forEach((section) => {
+                const sectionId = section.dataset.sectionId;
+                const spec = coords[sectionId];
+                if (!section || !spec || !spec.box) {
+                    prevRefY = null;
+                    prevRefH = null;
+                    return;
+                }
+
+                const box = spec.box;
+                const boxW = Math.round(box.w * scale.x);
+                section.style.width = `${boxW}px`;
+                section.style.maxWidth = `${boxW}px`;
+                section.style.marginLeft = `${Math.round(box.x * scale.x)}px`;
+                section.style.marginRight = '0';
+                if (gapResetAnchors.has(sectionId)) {
+                    prevRefY = null;
+                    prevRefH = null;
+                    section.style.marginTop = '';
+                }
+                if (prevRefY !== null && prevRefH !== null) {
+                    const refGap = Math.max(0, box.y - (prevRefY + prevRefH));
+                    section.style.marginTop = `${Math.round(refGap * scale.y)}px`;
+                }
+
+                if (section.classList.contains('metrics-card') && spec.items) {
+                    const grid = section.querySelector('.metrics-grid');
+                    if (grid) {
+                        const itemSpecs = Object.values(spec.items);
+                        if (itemSpecs.length > 1) {
+                            const gap = Math.max(0, Math.round((itemSpecs[1].x - (itemSpecs[0].x + itemSpecs[0].w)) * scale.x));
+                            grid.style.gap = `${gap}px`;
+                        }
+                    }
+
+                    Object.entries(spec.items).forEach(([itemId, itemSpec]) => {
+                        const card = section.querySelector(`.metric-item[data-item-id="${itemId}"]`);
+                        if (!card) {
+                            return;
+                        }
+                        card.style.width = `${Math.round(itemSpec.w * scale.x)}px`;
+                        card.style.minHeight = `${Math.round(itemSpec.h * scale.y)}px`;
+                    });
+
+                    if (spec.text) {
+                        section.style.setProperty('--metric-label-size', `${Math.max(8, Math.round(spec.text.labelSize * scale.x))}px`);
+                        section.style.setProperty('--metric-value-size', `${Math.max(10, Math.round(spec.text.valueSize * scale.x))}px`);
+                        section.style.setProperty('--metric-desc-size', `${Math.max(7, Math.round(spec.text.descSize * scale.x))}px`);
+                        section.style.setProperty('--metric-desc-line', String(spec.text.descLine || 1.25));
+                    }
+                }
+
+                if (section.classList.contains('case-shot')) {
+                    const grid = section.querySelector('.shot-grid');
+                    const media = section.querySelector('.shot-media');
+                    const copy = section.querySelector('.shot-copy');
+                    const frame = section.querySelector('.shot-frame');
+
+                    if (spec.media && media && frame && spec.box) {
+                        const mediaW = Math.round(spec.media.w * scale.x);
+                        const mediaH = Math.round(spec.media.h * scale.y);
+                        frame.style.width = `${mediaW}px`;
+                        frame.style.height = `${mediaH}px`;
+                        frame.style.marginLeft = `${Math.round((spec.media.x - box.x) * scale.x)}px`;
+                        frame.style.marginTop = `${Math.round((spec.media.y - box.y) * scale.y)}px`;
+                    }
+
+                    if (spec.copy && spec.media && spec.box && grid && media && copy) {
+                        grid.classList.add('precise-layout');
+                        section.style.minHeight = `${Math.round(spec.box.h * scale.y)}px`;
+                        grid.style.minHeight = `${Math.round(spec.box.h * scale.y)}px`;
+
+                        media.style.left = `${Math.round((spec.media.x - box.x) * scale.x)}px`;
+                        media.style.top = `${Math.round((spec.media.y - box.y) * scale.y)}px`;
+
+                        copy.style.left = `${Math.round((spec.copy.x - box.x) * scale.x)}px`;
+                        copy.style.top = `${Math.round((spec.copy.y - box.y) * scale.y)}px`;
+                        copy.style.width = `${Math.round(spec.copy.w * scale.x)}px`;
+                        copy.style.minHeight = `${Math.round(spec.copy.h * scale.y)}px`;
+
+                        if (spec.text) {
+                            copy.style.setProperty('--shot-copy-heading-size', `${Math.max(12, Math.round(spec.text.headingSize * scale.x))}px`);
+                            copy.style.setProperty('--shot-copy-body-size', `${Math.max(10, Math.round(spec.text.bodySize * scale.x))}px`);
+                            copy.style.setProperty('--shot-copy-line', String(spec.text.line || 1.04));
+                        }
+                    }
+
+                    if (spec.callouts) {
+                        Object.entries(spec.callouts).forEach(([calloutId, calloutSpec]) => {
+                            const anno = section.querySelector(`.shot-anno[data-callout-id="${calloutId}"]`);
+                            if (!anno || !calloutSpec || !calloutSpec.box) {
+                                return;
+                            }
+                            const cbox = calloutSpec.box;
+                            const boxEl = anno.querySelector('.shot-anno-box');
+                            anno.style.width = `${Math.round(cbox.w * scale.x)}px`;
+                            if (boxEl) {
+                                boxEl.style.minHeight = `${Math.round(cbox.h * scale.y)}px`;
+                            }
+                            if (spec.box) {
+                                const centerY = cbox.y + cbox.h / 2;
+                                const labelY = ((centerY - spec.box.y) / spec.box.h) * 100;
+                                anno.dataset.labelY = String(Math.max(0, Math.min(100, labelY)));
+                            }
+                        });
+                    }
+
+                    if (spec.stamp && frame) {
+                        const stamp = section.querySelector('.shot-stamp');
+                        if (stamp && spec.box) {
+                            stamp.style.width = `${Math.round(spec.stamp.w * scale.x)}px`;
+                            stamp.style.height = `${Math.round(spec.stamp.h * scale.y)}px`;
+                            stamp.style.left = `${Math.round((spec.stamp.x - box.x) * scale.x) - frame.offsetLeft}px`;
+                            stamp.style.top = `${Math.round((spec.stamp.y - box.y) * scale.y) - frame.offsetTop}px`;
+                            stamp.style.right = 'auto';
+                        }
+                    }
+                }
+
+                if (section.classList.contains('text-card')) {
+                    section.style.minHeight = `${Math.round(box.h * scale.y)}px`;
+
+                    if (spec.text) {
+                        section.style.setProperty('--text-heading-size', `${Math.max(11, Math.round(spec.text.headingSize * scale.x))}px`);
+                        section.style.setProperty('--text-body-size', `${Math.max(8, Math.round(spec.text.bodySize * scale.x))}px`);
+                        section.style.setProperty('--text-body-line', String(spec.text.bodyLine || 1.4));
+                    }
+
+                    if (spec.stamp) {
+                        const stamp = section.querySelector('.text-stamp');
+                        if (stamp) {
+                            stamp.style.width = `${Math.round(spec.stamp.w * scale.x)}px`;
+                            stamp.style.height = `${Math.round(spec.stamp.h * scale.y)}px`;
+                            stamp.style.left = `${Math.round(spec.stamp.x * scale.x) - Math.round(box.x * scale.x)}px`;
+                            stamp.style.top = `${Math.round(spec.stamp.y * scale.y) - Math.round(box.y * scale.y)}px`;
+                            if (stamp.classList.contains('right')) {
+                                stamp.style.right = 'auto';
+                            }
+                        }
+                    }
+                }
+
+                prevRefY = box.y;
+                prevRefH = box.h;
+            });
+        }
+
+        function setJsonRunnerStatus(message, isError) {
+            const status = document.getElementById('json-runner-status');
+            if (!status) {
+                return;
+            }
+            status.textContent = message || '';
+            status.classList.toggle('error', !!isError);
+        }
+
+        function downloadTextFile(fileName, text) {
+            const blob = new Blob([text], { type: 'application/json;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const anchor = document.createElement('a');
+            anchor.href = url;
+            anchor.download = fileName;
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+            URL.revokeObjectURL(url);
+        }
+
+        function setRunnerCollapsed(bodyEl, buttonEl, collapsed) {
+            if (!bodyEl || !buttonEl) {
+                return;
+            }
+            bodyEl.hidden = !!collapsed;
+            buttonEl.textContent = collapsed ? 'Expand' : 'Collapse';
+        }
+
+        function readStoredBool(key, fallback) {
+            try {
+                const raw = window.localStorage.getItem(key);
+                if (raw === null) {
+                    return fallback;
+                }
+                return raw === '1';
+            } catch (error) {
+                return fallback;
+            }
+        }
+
+        function writeStoredBool(key, value) {
+            try {
+                window.localStorage.setItem(key, value ? '1' : '0');
+            } catch (error) {
+                // Ignore storage write failures in private browsing or restricted contexts.
+            }
+        }
+
+        function initEditorLayoutMode() {
+            const frame = document.querySelector('.case-frame');
+            const splitToggle = document.getElementById('split-toggle');
+            const splitLabel = document.getElementById('split-toggle-label');
+            const editorToggle = document.getElementById('editor-toggle');
+            const renderModeToggle = document.getElementById('render-mode-toggle');
+            const viewReset = document.getElementById('view-reset');
+            const jsonRunner = document.getElementById('json-runner');
+            const layoutRunner = document.getElementById('layout-runner');
+            if (!frame || !splitToggle || !splitLabel || !editorToggle || !renderModeToggle || !viewReset || !jsonRunner || !layoutRunner) {
+                return;
+            }
+
+            if (!JSON_EDITOR_MODE) {
+                splitLabel.hidden = true;
+                editorToggle.hidden = true;
+                renderModeToggle.hidden = true;
+                viewReset.hidden = true;
+                jsonRunner.hidden = true;
+                layoutRunner.hidden = true;
+                return;
+            }
+
+            editorToggle.hidden = false;
+            renderModeToggle.hidden = false;
+            viewReset.hidden = false;
+            splitLabel.hidden = true;
+            jsonRunner.hidden = true;
+            layoutRunner.hidden = true;
+
+            function syncRenderToggleLabel() {
+                renderModeToggle.textContent = RENDER_MODE === 'json' ? 'Use PNG Render' : 'Use JSON Render';
+            }
+
+            function applySplitState(enabled) {
+                frame.classList.toggle('split-mode', enabled);
+            }
+
+            function setEditorsVisible(visible) {
+                jsonRunner.hidden = !visible;
+                layoutRunner.hidden = !visible;
+                splitLabel.hidden = !visible;
+                editorToggle.textContent = visible ? 'Hide Editors' : 'Edit Data';
+                writeStoredBool(STORAGE_KEYS.editorsVisible, visible);
+
+                if (!visible) {
+                    frame.classList.remove('split-mode');
+                    return;
+                }
+
+                applySplitState(!!splitToggle.checked);
+            }
+
+            splitToggle.checked = readStoredBool(STORAGE_KEYS.splitMode, SPLIT_MODE);
+            const editorsVisible = readStoredBool(STORAGE_KEYS.editorsVisible, false);
+            setEditorsVisible(editorsVisible);
+            syncRenderToggleLabel();
+
+            editorToggle.addEventListener('click', () => {
+                const opening = jsonRunner.hidden;
+                setEditorsVisible(opening);
+            });
+
+            renderModeToggle.addEventListener('click', () => {
+                RENDER_MODE = RENDER_MODE === 'json' ? 'image' : 'json';
+                syncRenderToggleLabel();
+                if (CASE_SOURCE_DATA) {
+                    renderActiveMode(CASE_SOURCE_DATA);
+                }
+            });
+
+            viewReset.addEventListener('click', () => {
+                writeStoredBool(STORAGE_KEYS.editorsVisible, false);
+                writeStoredBool(STORAGE_KEYS.splitMode, false);
+                splitToggle.checked = false;
+                setEditorsVisible(false);
+            });
+
+            splitToggle.addEventListener('change', () => {
+                if (jsonRunner.hidden) {
+                    splitToggle.checked = readStoredBool(STORAGE_KEYS.splitMode, SPLIT_MODE);
+                    return;
+                }
+                writeStoredBool(STORAGE_KEYS.splitMode, !!splitToggle.checked);
+                applySplitState(!!splitToggle.checked);
+            });
+        }
+
+        function initJsonRunner() {
+            const runner = document.getElementById('json-runner');
+            const input = document.getElementById('json-runner-input');
+            const runBtn = document.getElementById('json-runner-run');
+            const resetBtn = document.getElementById('json-runner-reset');
+            const downloadBtn = document.getElementById('json-runner-download');
+            const collapseBtn = document.getElementById('json-runner-collapse');
+            const body = document.getElementById('json-runner-body');
+
+            if (!runner || !input || !runBtn || !resetBtn || !downloadBtn || !collapseBtn || !body) {
+                return;
+            }
+
+            if (!JSON_EDITOR_MODE) {
+                runner.hidden = true;
+                return;
+            }
+
+            setRunnerCollapsed(body, collapseBtn, false);
+
+            runBtn.addEventListener('click', () => {
+                try {
+                    const parsed = JSON.parse(input.value);
+                    if (!parsed || !Array.isArray(parsed.sections)) {
+                        throw new Error('JSON must include a top-level sections array.');
+                    }
+                    RENDER_MODE = 'json';
+                    renderCaseStudy(parsed);
+                    const modeBtn = document.getElementById('render-mode-toggle');
+                    if (modeBtn) {
+                        modeBtn.textContent = 'Use PNG Render';
+                    }
+                    setJsonRunnerStatus('Rendered JSON successfully.', false);
+                } catch (error) {
+                    setJsonRunnerStatus(`JSON parse/render error: ${safeText(error.message)}`, true);
+                }
+            });
+
+            resetBtn.addEventListener('click', () => {
+                if (!CASE_SOURCE_DATA) {
+                    return;
+                }
+                input.value = JSON.stringify(CASE_SOURCE_DATA, null, 2);
+                renderActiveMode(CASE_SOURCE_DATA);
+                setJsonRunnerStatus('Reset to file JSON.', false);
+            });
+
+            downloadBtn.addEventListener('click', () => {
+                downloadTextFile('case-study-data.edited.json', input.value || '{}');
+                setJsonRunnerStatus('Downloaded JSON file.', false);
+            });
+
+            collapseBtn.addEventListener('click', () => {
+                setRunnerCollapsed(body, collapseBtn, !body.hidden);
+            });
+        }
+
+        function setLayoutRunnerStatus(message, isError) {
+            const status = document.getElementById('layout-runner-status');
+            if (!status) {
+                return;
+            }
+            status.textContent = message || '';
+            status.classList.toggle('error', !!isError);
+        }
+
+        function initLayoutRunner() {
+            const runner = document.getElementById('layout-runner');
+            const input = document.getElementById('layout-runner-input');
+            const runBtn = document.getElementById('layout-runner-run');
+            const resetBtn = document.getElementById('layout-runner-reset');
+            const downloadBtn = document.getElementById('layout-runner-download');
+            const collapseBtn = document.getElementById('layout-runner-collapse');
+            const body = document.getElementById('layout-runner-body');
+
+            if (!runner || !input || !runBtn || !resetBtn || !downloadBtn || !collapseBtn || !body) {
+                return;
+            }
+
+            if (!JSON_EDITOR_MODE) {
+                runner.hidden = true;
+                return;
+            }
+
+            setRunnerCollapsed(body, collapseBtn, false);
+
+            runBtn.addEventListener('click', () => {
+                try {
+                    const parsed = JSON.parse(input.value);
+                    if (!parsed || typeof parsed !== 'object') {
+                        throw new Error('Layout JSON must be an object.');
+                    }
+                    if (!parsed.coordinates || typeof parsed.coordinates !== 'object') {
+                        throw new Error('Layout JSON must include a coordinates object.');
+                    }
+
+                    CASE_LAYOUT = parsed;
+                    const root = document.getElementById('case-poster');
+                    if (RENDER_MODE === 'json') {
+                        applyReferenceLayout(root);
+                        pinLayoutJobs.forEach((job) => job());
+                    }
+                    setLayoutRunnerStatus('Applied layout JSON successfully.', false);
+                } catch (error) {
+                    setLayoutRunnerStatus(`Layout parse/apply error: ${safeText(error.message)}`, true);
+                }
+            });
+
+            resetBtn.addEventListener('click', () => {
+                if (!CASE_SOURCE_LAYOUT) {
+                    return;
+                }
+                CASE_LAYOUT = JSON.parse(JSON.stringify(CASE_SOURCE_LAYOUT));
+                input.value = JSON.stringify(CASE_SOURCE_LAYOUT, null, 2);
+                const root = document.getElementById('case-poster');
+                if (RENDER_MODE === 'json') {
+                    applyReferenceLayout(root);
+                    pinLayoutJobs.forEach((job) => job());
+                }
+                setLayoutRunnerStatus('Reset to file layout JSON.', false);
+            });
+
+            downloadBtn.addEventListener('click', () => {
+                downloadTextFile('case-study-layout.edited.json', input.value || '{}');
+                setLayoutRunnerStatus('Downloaded layout file.', false);
+            });
+
+            collapseBtn.addEventListener('click', () => {
+                setRunnerCollapsed(body, collapseBtn, !body.hidden);
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            if (RENDER_MODE !== 'json') {
+                return;
+            }
+            const root = document.getElementById('case-poster');
+            applyReferenceLayout(root);
+            pinLayoutJobs.forEach((job) => job());
+        });
+
+        async function initCaseStudy() {
+            const root = document.getElementById('case-poster');
+            try {
+                const [caseRes, layoutRes] = await Promise.all([
+                    fetch(CASE_DATA_URL, { cache: 'no-cache' }),
+                    fetch(CASE_LAYOUT_URL, { cache: 'no-cache' })
+                ]);
+
+                if (!caseRes.ok) {
+                    throw new Error(`Unable to load JSON (${caseRes.status})`);
+                }
+
+                const data = await caseRes.json();
+                CASE_LAYOUT = layoutRes.ok ? await layoutRes.json() : null;
+                CASE_SOURCE_LAYOUT = CASE_LAYOUT ? JSON.parse(JSON.stringify(CASE_LAYOUT)) : null;
+                CASE_SOURCE_DATA = data;
+                checkReferenceConsistency();
+                renderActiveMode(data);
+
+                const input = document.getElementById('json-runner-input');
+                if (input) {
+                    input.value = JSON.stringify(data, null, 2);
+                }
+
+                const layoutInput = document.getElementById('layout-runner-input');
+                if (layoutInput && CASE_LAYOUT) {
+                    layoutInput.value = JSON.stringify(CASE_LAYOUT, null, 2);
+                }
+            } catch (error) {
+                root.innerHTML = `<p class="case-status">Could not load case study JSON. ${safeText(error.message)}</p>`;
+            }
+        }
+
         document.getElementById('current-year').textContent = new Date().getFullYear();
+        initEditorLayoutMode();
+        initJsonRunner();
+        initLayoutRunner();
+        initCaseStudy();
     </script>
 
 </body>
