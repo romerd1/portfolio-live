@@ -25,7 +25,7 @@
       "id": "7b54e4c5-3342-411f-bdab-c6ae2459782c",
       "hideDividerAbove": false,
       "type": "timeline",
-      "heading": "OUr focus shifted from UX, to \"engineering\", to Systems",
+      "heading": "Our focus shifted from UX, to \"engineering\", to Systems",
       "headingSize": "large",
       "intro": "<h2><span style=\"color: rgb(106, 104, 103);\">The through-line: we designed (and maintained) the system that makes good UX writing repeatable.</span></h2><p></p>",
       "items": [
@@ -98,7 +98,7 @@
           "label": "More md files ",
           "value": "~300%",
           "valueSize": "medium",
-          "description": "We feed our systems with what we learn via mardown files, improving product quality and saving time",
+          "description": "We feed our systems with what we learn via markdown files, improving product quality and saving time",
           "valueColor": "positive"
         }
       ],
