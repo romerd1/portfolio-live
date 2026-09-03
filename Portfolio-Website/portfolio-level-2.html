@@ -4,13 +4,540 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 2: The AI Em-Dash - Dylan Romero</title>
+    <title>Level 2: Agentic Opportunity - Dylan Romero</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Sans+Pro:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/Portfolio-Website/style.css">
+    <style>
+        :root {
+            --case-ink: #1c1008;
+            --case-muted: #6b5230;
+            --case-paper: #f2e8cc;
+            --case-dark: #2c1a08;
+            --case-red: #c83018;
+            --case-green: #2d7a1a;
+            --case-border: #9d895e;
+            --case-shadow: #89764f;
+        }
+
+        main {
+            background: transparent;
+        }
+
+        main>.agentic-case-section {
+            margin: 0;
+            padding: 20px 0 32px;
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .agentic-shell {
+            width: min(1020px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .agentic-case {
+            overflow: hidden;
+            border: 4px solid var(--case-dark);
+            background: var(--case-paper);
+            color: var(--case-ink);
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.22);
+            font-family: 'Press Start 2P', monospace;
+            letter-spacing: 0;
+        }
+
+        .agentic-case h2,
+        .agentic-case h3,
+        .agentic-case p,
+        .agentic-case ul {
+            margin-top: 0;
+        }
+
+        .agentic-case p,
+        .agentic-case li {
+            overflow-wrap: anywhere;
+        }
+
+        .case-loading,
+        .case-error {
+            margin: 0;
+            padding: 48px 32px;
+            color: var(--case-muted);
+            font-size: 0.68rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .case-error {
+            color: #8f2415;
+        }
+
+        .study-block {
+            position: relative;
+            padding: 54px 32px;
+            border-top: 3px dotted var(--case-border);
+        }
+
+        .study-block[hidden] {
+            display: none;
+        }
+
+        .study-heading {
+            margin-bottom: 34px;
+            color: var(--case-ink);
+            font-size: 1rem;
+            line-height: 1.55;
+            text-transform: uppercase;
+        }
+
+        .study-heading[data-size="large"] {
+            font-size: 1.12rem;
+        }
+
+        .study-copy {
+            color: var(--case-muted);
+            font-size: 0.68rem;
+            line-height: 1.8;
+        }
+
+        .study-copy>:last-child {
+            margin-bottom: 0;
+        }
+
+        .case-hero {
+            position: relative;
+            padding: 48px 32px 52px;
+            background:
+                repeating-linear-gradient(180deg, rgba(242, 232, 204, 0.08) 0 2px, transparent 2px 10px),
+                var(--case-dark);
+            color: var(--case-paper);
+        }
+
+        .case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .case-tag {
+            padding: 7px 10px 6px;
+            border-right: 4px solid #8f6f45;
+            border-bottom: 4px solid #8f6f45;
+            background: var(--case-red);
+            color: #fff8e4;
+            font-size: 0.52rem;
+            line-height: 1.35;
+            text-transform: uppercase;
+        }
+
+        .case-title {
+            max-width: 900px;
+            margin: 0 0 30px;
+            color: var(--case-paper);
+            font-size: 1.38rem;
+            line-height: 1.5;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+        }
+
+        .case-subtitle {
+            max-width: 850px;
+            margin-bottom: 36px;
+            color: #d7c7a3;
+            font-size: 0.68rem;
+            line-height: 1.9;
+        }
+
+        .case-subtitle>:last-child {
+            margin-bottom: 0;
+        }
+
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            color: #d7c7a3;
+            font-size: 0.58rem;
+            line-height: 1.6;
+            text-transform: uppercase;
+        }
+
+        .case-meta-label {
+            color: #fff8e4;
+        }
+
+        .case-meta-divider {
+            margin: 0 9px;
+            color: #8f6f45;
+        }
+
+        .timeline-intro {
+            max-width: 880px;
+            margin-bottom: 42px;
+        }
+
+        .timeline-intro h1,
+        .timeline-intro h2,
+        .timeline-intro h3,
+        .timeline-intro p {
+            margin-bottom: 0;
+            color: var(--case-muted) !important;
+            font-size: 0.77rem;
+            line-height: 1.7;
+        }
+
+        .timeline-list {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            min-width: 0;
+            padding-top: 45px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            top: 19px;
+            left: 50%;
+            width: calc(100% + 18px);
+            height: 4px;
+            background: var(--case-red);
+        }
+
+        .timeline-item:last-child::before {
+            width: 50%;
+        }
+
+        .timeline-date {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 50%;
+            min-width: 150px;
+            transform: translateX(-50%);
+            padding: 9px 10px;
+            border: 3px solid var(--case-red);
+            background: var(--case-red);
+            box-shadow: 4px 4px 0 var(--case-shadow);
+            color: #fff8e4;
+            font-size: 0.48rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .timeline-card {
+            min-height: 190px;
+            padding: 24px 18px;
+            border: 3px solid var(--case-border);
+            border-top: 5px solid var(--case-red);
+            background: #f5ebd0;
+            box-shadow: 5px 5px 0 var(--case-shadow);
+        }
+
+        .timeline-phase {
+            margin-bottom: 20px;
+            color: var(--case-red);
+            font-size: 0.48rem;
+            line-height: 1.4;
+            text-transform: uppercase;
+        }
+
+        .timeline-title {
+            margin-bottom: 16px;
+            font-size: 0.72rem;
+            line-height: 1.65;
+        }
+
+        .timeline-description {
+            color: #5e6b75;
+            font-size: 0.57rem;
+            line-height: 1.75;
+        }
+
+        .timeline-description>:last-child {
+            margin-bottom: 0;
+        }
+
+        .text-block-card {
+            width: min(730px, 100%);
+            margin: 0 auto;
+            padding: 34px 32px;
+            border: 3px solid var(--case-border);
+            background: #ead9ad;
+            box-shadow: 5px 5px 0 var(--case-shadow);
+        }
+
+        .text-block-card .study-heading {
+            margin-bottom: 24px;
+        }
+
+        .text-feature {
+            color: var(--case-red);
+            font-size: 1.5rem;
+            line-height: 1.55;
+            text-align: center;
+        }
+
+        .text-feature h1,
+        .text-feature h2,
+        .text-feature h3,
+        .text-feature p {
+            margin: 0;
+            color: inherit !important;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .text-stamp {
+            position: absolute;
+            right: 24px;
+            bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .comparison-heading {
+            margin-bottom: 28px;
+        }
+
+        .comparison-stage {
+            --reveal: 50%;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 2748 / 1536;
+            overflow: hidden;
+            border: 4px solid var(--case-border);
+            background: #c7d7e5;
+            box-shadow: 5px 5px 0 var(--case-shadow);
+            isolation: isolate;
+        }
+
+        .comparison-stage:focus-within {
+            outline: 4px dashed var(--case-red);
+            outline-offset: 5px;
+        }
+
+        .comparison-image {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .comparison-image.after {
+            z-index: 2;
+            clip-path: inset(0 calc(100% - var(--reveal)) 0 0);
+        }
+
+        .comparison-divider {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            bottom: 0;
+            left: var(--reveal);
+            width: 4px;
+            transform: translateX(-50%);
+            background: var(--case-red);
+            box-shadow: 0 0 0 2px rgba(255, 248, 228, 0.9);
+            pointer-events: none;
+        }
+
+        .comparison-handle {
+            position: absolute;
+            z-index: 4;
+            top: 50%;
+            left: var(--reveal);
+            display: grid;
+            place-items: center;
+            width: 54px;
+            height: 54px;
+            transform: translate(-50%, -50%);
+            border: 4px solid #fff8e4;
+            background: var(--case-red);
+            box-shadow: 4px 4px 0 rgba(28, 16, 8, 0.45);
+            color: #fff8e4;
+            font-family: Arial, sans-serif;
+            font-size: 1.6rem;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .comparison-range {
+            position: absolute;
+            z-index: 5;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            cursor: ew-resize;
+            opacity: 0.001;
+        }
+
+        .comparison-label {
+            position: absolute;
+            z-index: 4;
+            bottom: 14px;
+            padding: 7px 10px;
+            color: #fff;
+            font-size: 0.48rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        .comparison-label.after {
+            left: 14px;
+            background: var(--case-green);
+        }
+
+        .comparison-label.before {
+            right: 14px;
+            background: var(--case-red);
+        }
+
+        .comparison-caption {
+            margin: 24px 0 0;
+            color: var(--case-muted);
+            font-size: 0.58rem;
+            line-height: 1.85;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .metric-card {
+            min-width: 0;
+            padding: 24px 18px;
+            border: 3px solid var(--case-border);
+            background: #f5ebd0;
+            box-shadow: 5px 5px 0 var(--case-shadow);
+        }
+
+        .metric-value {
+            margin: 0 0 14px;
+            color: var(--case-green);
+            font-size: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .metric-label {
+            margin: 0 0 12px;
+            font-size: 0.62rem;
+            line-height: 1.65;
+        }
+
+        .metric-description {
+            margin: 0;
+            color: var(--case-muted);
+            font-size: 0.52rem;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 760px) {
+            .agentic-shell {
+                width: min(100% - 16px, 1020px);
+            }
+
+            .agentic-case {
+                border-width: 3px;
+                box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .case-hero,
+            .study-block {
+                padding: 36px 20px;
+            }
+
+            .case-title {
+                font-size: 1rem;
+            }
+
+            .study-heading,
+            .study-heading[data-size="large"] {
+                font-size: 0.82rem;
+            }
+
+            .timeline-list,
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-list {
+                gap: 24px;
+            }
+
+            .timeline-item {
+                padding: 0 0 0 28px;
+            }
+
+            .timeline-item::before {
+                top: 0;
+                bottom: -24px;
+                left: 7px;
+                width: 4px;
+                height: auto;
+            }
+
+            .timeline-item:last-child::before {
+                width: 4px;
+                height: 50%;
+            }
+
+            .timeline-date {
+                position: relative;
+                top: auto;
+                left: auto;
+                display: inline-block;
+                min-width: 0;
+                margin-bottom: 12px;
+                transform: none;
+            }
+
+            .timeline-card {
+                min-height: 0;
+            }
+
+            .text-block-card {
+                padding: 28px 20px;
+            }
+
+            .text-feature {
+                font-size: 1.05rem;
+            }
+
+            .comparison-handle {
+                width: 44px;
+                height: 44px;
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .comparison-image.after,
+            .comparison-divider,
+            .comparison-handle {
+                transition: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -18,8 +545,8 @@
     <header>
         <div class="container header-container">
             <div class="header-title">
-                <h1>Level 2: The AI Em-Dash</h1>
-                <p>Case Study</p>
+                <h1>Level 2: Agentic Opportunity</h1>
+                <p>Interactive Case Study</p>
             </div>
             <div class="header-buttons">
                 <a href="/" class="nav-btn">Back to Portfolio</a>
@@ -29,49 +556,11 @@
     </header>
 
     <main>
-        <section>
-            <div class="container">
-                <div class="section-body-padded">
-                    <img src="/Portfolio-Website/ai-transformation-8bit.png" alt="8-bit AI transformation visual"
-                        class="hero-image">
-
-                    <div class="text-content">
-                        <h2>System Overview</h2>
-                        <p>At Microsoft, I lead a team of UX writers working on products and services ranging from
-                            Office to AI. This case study will document <strong>[the AI product, platform, or internal
-                                system]</strong>, the audience it served, and how content design helped
-                            <strong>[customer or business outcome]</strong>.
-                        </p>
-
-                        <h2>The AI Challenge</h2>
-                        <p>My work sits at the intersection of content, storytelling, strategy, design, and UX. Set up
-                            the problem by explaining <strong>[what users or teams needed from AI]</strong>,
-                            <strong>[where the existing experience broke down]</strong>, and <strong>[the trust,
-                                quality, or scale constraint that mattered most]</strong>.
-                        </p>
-
-                        <h2>The Build Plan</h2>
-                        <p>As Principal Content Design Manager, I <strong>[describe your role, team, and decision
-                                scope]</strong>. Show how you translated content strategy into the AI system, then
-                            replace these prompts with concrete examples:</p>
-                        <ul>
-                            <li><strong>[The agent, skill, prompt pattern, or language-system component you
-                                    built]</strong></li>
-                            <li><strong>[The evaluation method or quality standard you introduced]</strong></li>
-                            <li><strong>[How you partnered with product, design, engineering, research, or
-                                    leadership]</strong></li>
-                        </ul>
-
-                        <h2>Impact Signals</h2>
-                        <p>Add only results approved for public sharing: <strong>[quality or task-success
-                                signal]</strong>,
-                            <strong>[time or effort saved]</strong>, <strong>[adoption across teams or
-                                products]</strong>,
-                            and <strong>[customer or business outcome]</strong>. Close with <strong>[what this changed
-                                about how the organization designs AI experiences]</strong>.
-                        </p>
-                    </div>
-                </div>
+        <section class="agentic-case-section">
+            <div class="agentic-shell">
+                <article id="agentic-case" class="agentic-case" aria-live="polite">
+                    <p class="case-loading">Loading interactive case study...</p>
+                </article>
             </div>
         </section>
     </main>
@@ -83,8 +572,277 @@
     </footer>
 
     <script>
-        // --- Footer Year ---
+        const CASE_DATA_URL = '/Portfolio-Website/level-2-case-study-1/turning-discipline-title-changes-into-an-agentic-opportunity.casestudy.json';
+
+        function htmlText(html) {
+            const node = document.createElement('div');
+            node.innerHTML = html || '';
+            return (node.textContent || '').trim();
+        }
+
+        function setRichText(node, html) {
+            node.innerHTML = html || '';
+            return node;
+        }
+
+        function createBlock(className) {
+            const block = document.createElement('section');
+            block.className = `study-block ${className}`;
+            return block;
+        }
+
+        function createHeading(section) {
+            const heading = document.createElement('h2');
+            heading.className = 'study-heading';
+            heading.dataset.size = section.headingSize || 'medium';
+            heading.textContent = section.heading || '';
+            return heading;
+        }
+
+        function renderHero(section) {
+            const block = document.createElement('section');
+            block.className = 'case-hero';
+
+            const tags = document.createElement('div');
+            tags.className = 'case-tags';
+            (section.tags || []).forEach((tag) => {
+                const item = document.createElement('span');
+                item.className = 'case-tag';
+                item.textContent = tag;
+                tags.appendChild(item);
+            });
+            block.appendChild(tags);
+
+            const title = document.createElement('h2');
+            title.className = 'case-title';
+            title.textContent = htmlText(section.title);
+            block.appendChild(title);
+
+            const subtitle = setRichText(document.createElement('div'), section.subtitle);
+            subtitle.className = 'case-subtitle';
+            block.appendChild(subtitle);
+
+            const meta = document.createElement('div');
+            meta.className = 'case-meta';
+            if (section.showClient !== false && section.client) {
+                const client = document.createElement('span');
+                client.innerHTML = `<span class="case-meta-label"></span><span class="case-meta-divider">/</span><span class="case-meta-value"></span>`;
+                client.querySelector('.case-meta-label').textContent = section.clientLabel || 'Client';
+                client.querySelector('.case-meta-value').textContent = section.client;
+                meta.appendChild(client);
+            }
+            if (section.showYear !== false && section.year) {
+                const year = document.createElement('span');
+                year.innerHTML = `<span class="case-meta-label"></span><span class="case-meta-divider">/</span><span class="case-meta-value"></span>`;
+                year.querySelector('.case-meta-label').textContent = section.yearLabel || 'Year';
+                year.querySelector('.case-meta-value').textContent = section.year;
+                meta.appendChild(year);
+            }
+            block.appendChild(meta);
+            return block;
+        }
+
+        function renderTimeline(section) {
+            const block = createBlock('timeline-block');
+            block.appendChild(createHeading(section));
+
+            const intro = setRichText(document.createElement('div'), section.intro);
+            intro.className = 'timeline-intro';
+            block.appendChild(intro);
+
+            const list = document.createElement('ol');
+            list.className = 'timeline-list';
+            (section.items || []).forEach((item, index) => {
+                const entry = document.createElement('li');
+                entry.className = 'timeline-item';
+
+                const date = document.createElement('p');
+                date.className = 'timeline-date';
+                date.textContent = item.date || '';
+                entry.appendChild(date);
+
+                const card = document.createElement('article');
+                card.className = 'timeline-card';
+                const phase = document.createElement('p');
+                phase.className = 'timeline-phase';
+                phase.textContent = `Phase ${String(index + 1).padStart(2, '0')}`;
+                card.appendChild(phase);
+                const title = document.createElement('h3');
+                title.className = 'timeline-title';
+                title.textContent = item.title || '';
+                card.appendChild(title);
+                const description = setRichText(document.createElement('div'), item.description);
+                description.className = 'timeline-description';
+                card.appendChild(description);
+                entry.appendChild(card);
+                list.appendChild(entry);
+            });
+            block.appendChild(list);
+            return block;
+        }
+
+        function renderText(section) {
+            const block = createBlock('text-block');
+            const card = document.createElement('div');
+            card.className = 'text-block-card';
+            card.appendChild(createHeading(section));
+            const content = setRichText(document.createElement('div'), section.content);
+            content.className = 'text-feature';
+            card.appendChild(content);
+            block.appendChild(card);
+            if (section.textStamp && section.textStamp.emoji) {
+                const stamp = document.createElement('span');
+                stamp.className = 'text-stamp';
+                stamp.setAttribute('aria-hidden', 'true');
+                stamp.textContent = section.textStamp.emoji;
+                block.appendChild(stamp);
+            }
+            return block;
+        }
+
+        function renderComparison(section) {
+            const block = createBlock('comparison-block');
+            const heading = createHeading(section);
+            heading.classList.add('comparison-heading');
+            block.appendChild(heading);
+
+            const reveal = Math.max(0, Math.min(100, Number(section.revealPct) || 50));
+            const stage = document.createElement('div');
+            stage.className = 'comparison-stage';
+            stage.style.setProperty('--reveal', `${reveal}%`);
+
+            const before = document.createElement('img');
+            before.className = 'comparison-image before';
+            before.src = section.beforeImageUrl;
+            before.alt = 'Before: traditional office hours model';
+            before.draggable = false;
+            stage.appendChild(before);
+
+            const after = document.createElement('img');
+            after.className = 'comparison-image after';
+            after.src = section.afterImageUrl;
+            after.alt = 'After: office hours as an AI knowledge engine';
+            after.draggable = false;
+            stage.appendChild(after);
+
+            const divider = document.createElement('span');
+            divider.className = 'comparison-divider';
+            divider.setAttribute('aria-hidden', 'true');
+            stage.appendChild(divider);
+
+            const handle = document.createElement('span');
+            handle.className = 'comparison-handle';
+            handle.setAttribute('aria-hidden', 'true');
+            handle.textContent = '<>';
+            stage.appendChild(handle);
+
+            const afterLabel = document.createElement('span');
+            afterLabel.className = 'comparison-label after';
+            afterLabel.textContent = 'After';
+            stage.appendChild(afterLabel);
+
+            const beforeLabel = document.createElement('span');
+            beforeLabel.className = 'comparison-label before';
+            beforeLabel.textContent = 'Before';
+            stage.appendChild(beforeLabel);
+
+            const range = document.createElement('input');
+            range.className = 'comparison-range';
+            range.type = 'range';
+            range.min = '0';
+            range.max = '100';
+            range.value = String(reveal);
+            range.setAttribute('aria-label', 'Reveal the before or after office hours model');
+            range.setAttribute('aria-valuetext', `${reveal}% after view`);
+            range.addEventListener('input', () => {
+                const value = Number(range.value);
+                stage.style.setProperty('--reveal', `${value}%`);
+                range.setAttribute('aria-valuetext', `${value}% after view`);
+            });
+            stage.appendChild(range);
+            block.appendChild(stage);
+
+            if (section.caption) {
+                const caption = document.createElement('p');
+                caption.className = 'comparison-caption';
+                caption.textContent = section.caption;
+                block.appendChild(caption);
+            }
+            return block;
+        }
+
+        function renderMetrics(section) {
+            const block = createBlock('metrics-block');
+            block.appendChild(createHeading(section));
+            const grid = document.createElement('div');
+            grid.className = 'metrics-grid';
+            (section.items || []).forEach((item) => {
+                const card = document.createElement('article');
+                card.className = 'metric-card';
+                const value = document.createElement('p');
+                value.className = 'metric-value';
+                value.textContent = item.value || '';
+                card.appendChild(value);
+                const label = document.createElement('h3');
+                label.className = 'metric-label';
+                label.textContent = item.label || '';
+                card.appendChild(label);
+                const description = document.createElement('p');
+                description.className = 'metric-description';
+                description.textContent = item.description || '';
+                card.appendChild(description);
+                grid.appendChild(card);
+            });
+            block.appendChild(grid);
+            return block;
+        }
+
+        function renderCaseStudy(data) {
+            const root = document.getElementById('agentic-case');
+            root.innerHTML = '';
+            const renderers = {
+                hero: renderHero,
+                timeline: renderTimeline,
+                text: renderText,
+                comparison: renderComparison,
+                metrics: renderMetrics
+            };
+            (data.sections || []).forEach((section) => {
+                const renderer = renderers[section.type];
+                if (renderer) {
+                    root.appendChild(renderer(section));
+                }
+            });
+            const hero = (data.sections || []).find((section) => section.type === 'hero');
+            const title = hero ? htmlText(hero.title) : '';
+            if (title) {
+                document.title = `${title} - Dylan Romero`;
+            }
+        }
+
+        async function initCaseStudy() {
+            const root = document.getElementById('agentic-case');
+            try {
+                const response = await fetch(CASE_DATA_URL, { cache: 'no-cache' });
+                if (!response.ok) {
+                    throw new Error(`Unable to load case study (${response.status})`);
+                }
+                const data = await response.json();
+                if (!data || !Array.isArray(data.sections)) {
+                    throw new Error('Case study data is missing its sections.');
+                }
+                renderCaseStudy(data);
+            } catch (error) {
+                root.innerHTML = '';
+                const message = document.createElement('p');
+                message.className = 'case-error';
+                message.textContent = `Could not load the interactive case study. ${error.message}`;
+                root.appendChild(message);
+            }
+        }
+
         document.getElementById('current-year').textContent = new Date().getFullYear();
+        initCaseStudy();
     </script>
 
 </body>
