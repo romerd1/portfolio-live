@@ -33,19 +33,19 @@
           "id": "b4e7660d-180e-4843-9bac-000a7e4010e3",
           "title": "From becoming \"AI-first\"...",
           "description": "<p><span style=\"color: rgb(94, 107, 117);\">UX writing all up gave way to UX for new agents and AI-first products.</span></p>",
-          "date": "Apr '23 - May '25"
+          "date": "2024"
         },
         {
           "id": "ed5e06e5-72fe-4eb4-8459-6f4aa13fed01",
           "title": "...to content engineering...",
           "description": "<p><span style=\"color: rgb(94, 107, 117);\">Evals, response quality, and building our own Content Design agent(s).</span></p>",
-          "date": "May '25 - Mar '26"
+          "date": "2025"
         },
         {
           "id": "a460c5fb-5df4-4aac-9d29-e508a9723e9d",
           "title": "...to building the system",
           "description": "<p><span style=\"color: rgb(94, 107, 117);\">A cross-org Language System, a DPG content repo, and a shared definition of Quality.</span></p>",
-          "date": "Mar '26 - Present"
+          "date": "2026"
         }
       ]
     },
@@ -56,10 +56,7 @@
       "heading": "But that meant shifting how we work. We went from being embedded in vertical product spaces, to horizontal systems. Which brought back the bone-chilling specter of...",
       "headingSize": "large",
       "content": "<h1> 🦇 <span style=\"color: rgb(180, 43, 22);\">Office Hours 🫣</span></h1><p></p>",
-      "textStamp": {
-        "emoji": "🔍",
-        "side": "right"
-      }
+      "textStamp": null
     },
     {
       "id": "01faf06f-f97b-42c3-88c9-7ddf535baeb8",
