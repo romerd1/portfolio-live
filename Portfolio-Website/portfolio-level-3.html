@@ -11,6 +11,172 @@
         href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Sans+Pro:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/Portfolio-Website/style.css">
+    <style>
+        :root {
+            --jam-ink: #1c1008;
+            --jam-muted: #6b5230;
+            --jam-paper: #f6eecf;
+            --jam-dark: #2c1a08;
+            --jam-red: #c83018;
+            --jam-green: #2d7a1a;
+            --jam-border: #9d895e;
+            --jam-shadow: #89764f;
+        }
+
+        /* --- Pixel banner under the hero --- */
+        .jam-banner {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            line-height: 1.9;
+            text-align: center;
+            color: var(--jam-paper);
+            background: var(--jam-dark);
+            border: 4px solid var(--jam-ink);
+            box-shadow: 6px 6px 0 var(--jam-shadow);
+            padding: 16px 14px;
+            margin: 0 auto 34px auto;
+            max-width: 640px;
+        }
+
+        .jam-banner .jam-banner-sub {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.52rem;
+            color: #d8c79a;
+        }
+
+        /* --- Jam goals: four pixel cards --- */
+        .goal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 0 0 1.8em 0;
+        }
+
+        .goal-card {
+            background: var(--jam-paper);
+            border: 3px solid var(--jam-ink);
+            box-shadow: 4px 4px 0 var(--jam-shadow);
+            padding: 14px 16px;
+        }
+
+        .goal-card h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.58rem;
+            line-height: 1.7;
+            color: var(--jam-red);
+            margin: 0 0 8px 0;
+        }
+
+        .goal-card p {
+            font-size: 0.98rem;
+            line-height: 1.5;
+            margin: 0;
+            color: var(--jam-ink);
+        }
+
+        /* --- Three fluency levels, as game tiers --- */
+        .tier-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.8em 0;
+        }
+
+        .tier-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--jam-paper);
+            border: 3px solid var(--jam-ink);
+            box-shadow: 4px 4px 0 var(--jam-shadow);
+            padding: 14px 16px;
+            margin-bottom: 14px;
+        }
+
+        .tier-badge {
+            flex: 0 0 auto;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.62rem;
+            line-height: 1;
+            color: var(--jam-paper);
+            background: var(--jam-green);
+            border: 3px solid var(--jam-ink);
+            padding: 10px 9px;
+            min-width: 46px;
+            text-align: center;
+        }
+
+        .tier-list li:nth-child(2) .tier-badge {
+            background: #b8860b;
+        }
+
+        .tier-list li:nth-child(3) .tier-badge {
+            background: var(--jam-red);
+        }
+
+        .tier-body strong {
+            display: block;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.58rem;
+            line-height: 1.7;
+            color: var(--jam-ink);
+            margin-bottom: 7px;
+        }
+
+        .tier-body span {
+            font-size: 0.98rem;
+            line-height: 1.5;
+            color: var(--jam-ink);
+        }
+
+        /* --- "Why these are different" callout --- */
+        .jam-callout {
+            background: var(--jam-dark);
+            border: 4px solid var(--jam-ink);
+            box-shadow: 6px 6px 0 var(--jam-shadow);
+            padding: 20px 22px;
+            margin: 0 0 1.8em 0;
+            color: var(--jam-paper);
+        }
+
+        .jam-callout h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.66rem;
+            line-height: 1.8;
+            color: #ffd479;
+            margin: 0 0 14px 0;
+        }
+
+        .jam-callout ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 1rem;
+        }
+
+        .jam-callout li {
+            margin-bottom: 0.7em;
+            line-height: 1.55;
+        }
+
+        .jam-callout li:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 760px) {
+            .goal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .jam-banner {
+                font-size: 0.56rem;
+            }
+
+            .tier-list li {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -35,39 +201,100 @@
                     <img src="/Portfolio-Website/microsoft-community-8bit.png"
                         alt="8-bit microsoft logo with connected profile headshots" class="hero-image">
 
+                    <p class="jam-banner">
+                        Content Engineering Learning Jams
+                        <span class="jam-banner-sub">Lightweight. Repeatable. Always hands-on.</span>
+                    </p>
+
                     <div class="text-content">
                         <h2>Community Overview</h2>
-                        <p>I co-lead Microsoft's 250+ member Content Design Community, which creates opportunities for
-                            members to learn, innovate, and improve the quality, efficiency, and scale of content
-                            design. This case study will focus on <strong>[the program, initiative, or turning
-                                point]</strong>.
-                        </p>
+                        <p>I co-lead Microsoft's 250+ member Content Design Community, where people come to learn,
+                            try things, and generally make content design better, faster, and bigger than any one
+                            team could on its own.</p>
+                        <p>This case study is about one thing we built inside it: the <strong>Content Engineering
+                                Learning Jams</strong>. As our org started treating content engineering as a real
+                            part of the practice, the way we learned together had to change too. So we changed it.</p>
 
                         <h2>The Alignment Challenge</h2>
-                        <p>Microsoft content designers support products and services ranging from Office to AI. Explain
-                            <strong>[the gap or recurring problem the community needed to solve]</strong>, <strong>[who
-                                was affected]</strong>, and <strong>[why normal team-by-team coordination was not
-                                enough]</strong>.
-                        </p>
+                        <p>Microsoft content designers support everything from Office to AI. That's a lot of ground
+                            to cover, and AI is not exactly holding still while we cover it. Keeping up means
+                            constantly learning, rethinking strategy, and applying new skills in real time.</p>
+                        <p>Here's the part that kept tripping people up. The gap wasn't understanding AI. Plenty of
+                            smart talks and docs had that covered. The gap was the distance between <em>"okay, I get
+                                it"</em> and <em>"I can actually do this, on my project, this week."</em> That's a
+                            much shorter sentence and a much harder problem, and no amount of slides was going to
+                            close it.</p>
 
                         <h2>How I Built the Network</h2>
-                        <p>As community co-lead, I <strong>[describe your ownership and collaborators]</strong>. Show
-                            how
-                            you turned a large professional network into a practical system for learning and
-                            contribution:</p>
-                        <ul>
-                            <li><strong>[Community ritual, workshop, event, or learning program]</strong></li>
-                            <li><strong>[Reusable guidance, operating model, or contribution path]</strong></li>
-                            <li><strong>[How members shared expertise or influenced work across teams]</strong></li>
+                        <p>The Jams are built on four goals, and every session gets measured against them:</p>
+
+                        <div class="goal-grid">
+                            <div class="goal-card">
+                                <h3>Shared practice</h3>
+                                <p>One content engineering practice across the org, not a dozen local dialects.</p>
+                            </div>
+                            <div class="goal-card">
+                                <h3>Reliable cadence</h3>
+                                <p>Learning you can count on showing up, not a one-off that never repeats.</p>
+                            </div>
+                            <div class="goal-card">
+                                <h3>On-demand help</h3>
+                                <p>Resources and support that are there when you hit the wall, not a quarter later.</p>
+                            </div>
+                            <div class="goal-card">
+                                <h3>Reusable patterns</h3>
+                                <p>Standardized patterns anyone can pick up and run with.</p>
+                            </div>
+                        </div>
+
+                        <p>The whole point is to give content designers the skills, fluency, and resources to shape
+                            AI products with confidence. Since nobody starts in the same place, the Jams run at three
+                            fluency levels and meet designers where they already are:</p>
+
+                        <ul class="tier-list">
+                            <li>
+                                <span class="tier-badge">LVL<br>1</span>
+                                <span class="tier-body">
+                                    <strong>Start here</strong>
+                                    <span>For anyone who wants in. You don't need to be an expert to
+                                        participate, because the structure does that work for you.</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="tier-badge">LVL<br>2</span>
+                                <span class="tier-body">
+                                    <strong>Keep up as the discipline moves</strong>
+                                    <span>Support and equip designers with the latest skills as content
+                                        engineering keeps evolving underneath everyone.</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="tier-badge">LVL<br>3</span>
+                                <span class="tier-body">
+                                    <strong>Lead the thinking</strong>
+                                    <span>Advanced designers stop being attendees and start being thought
+                                        leaders, sharing their own ideas, concepts, and approaches.</span>
+                                </span>
+                            </li>
                         </ul>
 
+                        <div class="jam-callout">
+                            <h3>Why a Jam isn't just another learning series</h3>
+                            <ul>
+                                <li>It goes after the gap between "I understand" and "I can actually do this on my
+                                    current project" &mdash; which is where most learning series quietly give up.</li>
+                                <li>No heavy prep. Show up, open your laptop, and bring whatever you're actually
+                                    working on.</li>
+                                <li>The structure is provided, so you don't have to be an expert to get something out
+                                    of it.</li>
+                            </ul>
+                        </div>
+
                         <h2>Community Signals</h2>
-                        <p>Add approved evidence such as <strong>[participation or growth]</strong>, <strong>[member
-                                feedback]</strong>, <strong>[resource adoption]</strong>, <strong>[time saved]</strong>,
-                            or <strong>[quality improvement]</strong>. Explain how the work contributed to
-                            <strong>[learning]</strong>, <strong>[innovation]</strong>, and <strong>[quality,
-                                efficiency, or scale]</strong>.
-                        </p>
+                        <p>The Jams are designed so the evidence shows up in people's actual work rather than in a
+                            post-session survey: patterns getting reused across teams, designers shipping AI work
+                            they'd have punted on a quarter earlier, and the advanced folks turning into the ones
+                            running sessions.</p>
                     </div>
                 </div>
             </div>
